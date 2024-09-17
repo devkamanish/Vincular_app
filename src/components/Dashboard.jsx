@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from "next/image";
 import Link from "next/link"
+import BisDashboard from './BisDashboard';
 
 const Dashboard = () => {
   return (
@@ -12,26 +13,30 @@ const Dashboard = () => {
           <h1 className="text-3xl font-mono mb-8">Select Service</h1>
           
           {/* Services Section */}
-          <div className="flex space-x-12">
-            <Link href="#">
-              <Image src="/BIS_logo.png" alt="Service 1" width={100} height={100} />
+          <div className="flex space-x-12 ">
+            <Link href="/bis">
+              <Image className = "  p-4 bg-white border-2 border-gray-300 rounded-lg hover:shadow-lg transition duration-300 " src="/BIS_logo.png" alt="Service 1" width={100} height={100} />
             </Link>
-            <Link href="#">
-              <Image src="" alt="Service 2" width={100} height={100} />
+            <Link href= "/tec">
+              <Image className = "p-4 bg-white border-2 border-gray-300 rounded-lg hover:shadow-lg transition duration-300" src="/TEC_logo.png" alt="Service 2" width={100} height={100} />
+              
             </Link>
           </div>
         </div>
 
+
         {/* Cute Animated Character */}
-        <div className="absolute right-10 bottom-10">
+        <div className=" absolute right-10 bottom-40 bg-[#D3B8A1]">
           <Image
-            src="/"
+            className = ""
+            src="/gif_1.gif"
             alt="Cute Character"
             width={250}
             height={250}
           />
         </div>
       </main>
+
 
       {/* Footer */}
       <footer className="w-full text-center py-4">
@@ -42,3 +47,5 @@ const Dashboard = () => {
 }
 
 export default Dashboard 
+
+
