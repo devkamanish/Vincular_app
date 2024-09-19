@@ -1,6 +1,8 @@
-import React from 'react'
+
+"use client"
 
 const BisDashboard = () => {
+  
   return (
     <>
     <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10 border-b-4 ">
@@ -18,6 +20,7 @@ const BisDashboard = () => {
             className="w-12 h-12" 
           />
         </div>
+
 
         
         <div className="mb-4">
@@ -121,7 +124,7 @@ const BisDashboard = () => {
 </div>
 
 {/* Submit */}
-<button className="bg-blue-600 text-white px-4 py-2 rounded-md mb-8 w-5/6 hover:bg-blue-400">Submit</button>
+<button className="bg-blue-500 text-white px-4 py-2 rounded-md mb-8 w-5/6 hover:bg-blue-600">Submit</button>
 
 <div className="text-center">
   <p className="text-gray-500">Scroll down for B&S docs tree chart</p>
