@@ -1,6 +1,8 @@
 
 "use client"
 
+import GoToHome from "./GoToHome"
+
 const BisDashboard = () => {
   
   return (
@@ -14,11 +16,7 @@ const BisDashboard = () => {
       {/* Left  */}
       <div className="w-1/3 bg-white shadow-md p-6 rounded-lg">
         <div className="flex items-center justify-center mb-4">
-          <img 
-            src="/Home_icon.png" 
-            alt="Home" 
-            className="w-12 h-12" 
-          />
+          <GoToHome/>
         </div>
 
 

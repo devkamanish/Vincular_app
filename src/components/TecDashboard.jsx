@@ -1,5 +1,6 @@
 // pages/tec.js
 import React from 'react';
+import GoToHome from './GoToHome';
 
 const TecDashboard = () => {
   return (
@@ -11,11 +12,7 @@ const TecDashboard = () => {
         {/* Left Section - Profile Creation */}
         <div className="w-1/3 bg-white p-6 rounded-lg shadow-md">
           <div className="flex items-center justify-center mb-4">
-            <img 
-              src="/Home_icon.png" 
-              alt="Home Icon" 
-              className="w-12 h-12" 
-            />
+            <GoToHome/>
           </div>
           
           <h2 className="text-2xl font-semibold mb-4">Profile Creation</h2>

@@ -4,6 +4,7 @@ import Link from "next/link"
 import BisDashboard from './BisDashboard';
 
 const Dashboard = () => {
+
   return (
     
     <div className="h-screen bg-[#D3B8A1] flex flex-col justify-between items-center">
