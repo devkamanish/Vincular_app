@@ -1,7 +1,6 @@
 import React from 'react'
 import Image from "next/image";
 import Link from "next/link"
-import BisDashboard from './BisDashboard';
 
 const Dashboard = () => {
 
@@ -48,5 +47,6 @@ const Dashboard = () => {
 }
 
 export default Dashboard 
+
 
 

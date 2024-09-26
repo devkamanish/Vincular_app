@@ -2,12 +2,14 @@
 "use client"
 
 import GoToHome from "./GoToHome"
+import TreeComponent from "./TreeComponent"
+import DownArrow from "./DownArrow"
 
 const BisDashboard = () => {
   
   return (
     <>
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10 border-b-4 ">
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10  ">
     <h1 className="text-4xl font-bold mb-4 mt-0">BIS Docs</h1>
 
     
@@ -125,25 +127,33 @@ const BisDashboard = () => {
 <button className="bg-blue-500 text-white px-4 py-2 rounded-md mb-8 w-5/6 hover:bg-blue-600">Submit</button>
 
 <div className="text-center">
-  <p className="text-gray-500">Scroll down for B&S docs tree chart</p>
-  <p className="text-gray-500">(click on the applicable list to auto-select docs)</p>
+  <p className="text-gray-500">Scroll down for BIS docs tree chart</p>
+  <p className="text-gray-500">(click on the applicable list to auto select docs)</p>
 </div> 
 
-
+    <div>
+    <div className="">
+      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2">
+        <DownArrow />
+      </div>
+    </div>
+    </div>
  </div>
 
 
 
 {/* Scroll page */}
-  <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10">
-    <h1>Hello world</h1>
-  </div>
+     <div className="scroll-container w-full overflow-x-auto py-4  border-gray-100">
+        <TreeComponent />
+      </div>
   </>
   
   )
 }
 
 export default BisDashboard 
+
+
 
 
 
