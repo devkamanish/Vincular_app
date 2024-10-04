@@ -1,13 +1,19 @@
+
+import { useContext } from "react";
+import { FormContext } from "./context/FormContext";
 import '../styles/tree.css'
 
 const TreeComponent = () => {
-  
+
+  //context
+  const { setSelectedForms } = useContext(FormContext);
+
 
   const handleClick = (targetIds, event) => {
     event.preventDefault();
     
-    event.preventDefault();  // Prevent default anchor behavior
-  
+    setSelectedForms(targetIds);
+
     targetIds.forEach((targetId) => {
       const targetElement = document.getElementById(targetId);
       if (targetElement) {

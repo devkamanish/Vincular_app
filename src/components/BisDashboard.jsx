@@ -4,9 +4,29 @@
   import GoToHome from "./GoToHome"
   import TreeComponent from "./TreeComponent"
   import DownArrow from "./DownArrow"
-import Link from "next/link"
+  import Link from "next/link"
+  import { useContext } from "react";
+  import { useRouter } from "next/navigation"; 
+  import { FormContext } from "./context/FormContext";
+  
+
 
   const BisDashboard = () => {
+
+
+    const { selectedForms } = useContext(FormContext);
+    const router = useRouter();
+
+
+    const handleSubmit = () => {
+      if (selectedForms.length > 0) {
+        // Redirect to the dynamic form page
+        router.push("/formbis"); // Make sure you have a formpage route
+      } else {
+        alert("Please select a form before submitting.");
+      }
+    };
+
     const [selectedCheckboxes, setSelectedCheckboxes] = useState({
       form2: false,
       brandAuth: false,
@@ -185,9 +205,9 @@ import Link from "next/link"
   </div>
 
   {/* Submit */}
-  <Link href={`/formbis${queryString}`} passHref className ="bg-blue-500 text-white px-4 py-2 rounded-md mb-8 w-5/6 hover:bg-blue-600 text-center" >
-  <button className="" >Submit</button>
-  </Link>
+      
+  <button onClick = {handleSubmit} className="bg-blue-500 text-white px-4 py-2 rounded-md mb-8 w-5/6 hover:bg-blue-600 text-center" >Submit</button>
+  
   <div className="text-center">
     <p className="text-gray-500">Scroll down for BIS docs tree chart</p>
     <p className="text-gray-500">(click on the applicable list to auto select docs)</p>
@@ -201,7 +221,7 @@ import Link from "next/link"
       </div>
       </div>
   </div>
-
+      
 
 
   {/* Scroll page */}
