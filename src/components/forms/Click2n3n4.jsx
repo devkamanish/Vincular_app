@@ -1,7 +1,7 @@
 
 "use client"
 import { useState } from "react";
-import GoToHome from "./GoToHome";
+import GoToHome from "../GoToHome";
 
 export default function Click2() {
   const [formData, setFormData] = useState({
@@ -26,6 +26,7 @@ export default function Click2() {
     irSignatoryName: ""
   });
 
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -38,7 +39,7 @@ export default function Click2() {
     e.preventDefault();
     console.log(formData);
     // Handle form submission, e.g., send data to an API
-  };
+  };  
 
   return (
     <div className="max-w-2xl mx-auto p-4 bg-white rounded-lg shadow-md">
@@ -255,12 +256,13 @@ export default function Click2() {
           type="submit"
           className="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
         >
-          Submit
+          form2
         </button>
       </form>
     </div>
   );
 }
+
 
 
 

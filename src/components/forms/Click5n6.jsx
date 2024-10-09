@@ -1,7 +1,7 @@
 
 "use client"
 import { useState } from "react";
-import GoToHome from "./GoToHome";
+import GoToHome from "../GoToHome";
 
 export default function Click4() {
   const [formData, setFormData] = useState({
@@ -297,7 +297,7 @@ export default function Click4() {
           type="submit"
           className="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
         >
-        
+        form3
         </button>
       </form>
     </div>
