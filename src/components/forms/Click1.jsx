@@ -2,6 +2,7 @@
 "use client"
 import { useState } from "react";
 import GoToHome from "../GoToHome";
+import { useRouter } from "next/navigation";
 
 export default function Click1() {
   const [formData, setFormData] = useState({
@@ -20,6 +21,7 @@ export default function Click1() {
     irSignatoryName: ""
   });
 
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -34,11 +36,17 @@ export default function Click1() {
     // Handle form submission, e.g., send data to an API
   };
 
+  const router = useRouter();
+
+  const handleDone = () => {
+    router.push('/download')
+  }
+
   return (
     <div className="max-w-2xl p-4 mx-auto bg-white rounded-lg shadow-md">
-      
+
       <h1 className="mb-6 text-3xl font-bold text-center ">Please fill the form!</h1>
-      <GoToHome/>
+      <GoToHome />
       <form onSubmit={handleSubmit}>
         {/* Manufacturer Name */}
         <div className="mb-4">
@@ -200,10 +208,12 @@ export default function Click1() {
         <button
           type="submit"
           className="w-full p-3 text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
+          onClick={handleDone}
         >
-          Clickk1
+          Done
         </button>
       </form>
     </div>
   );
 }
+

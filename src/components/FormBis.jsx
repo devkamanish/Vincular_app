@@ -10,7 +10,8 @@ import Click7 from "./forms/Click7n8n9n10n11n12n13n14";
 
 const FormPage = () => {
   const { selectedForms } = useContext(FormContext);
-
+  console.log(selectedForms);
+  
   return (
     <div>
       {selectedForms.map((formId) => (

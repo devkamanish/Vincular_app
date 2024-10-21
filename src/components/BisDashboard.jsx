@@ -3,24 +3,15 @@ import { useState } from "react";
 import GoToHome from "./GoToHome";
 import TreeComponent from "./TreeComponent";
 import DownArrow from "./DownArrow";
-import Link from "next/link";
 import { useContext } from "react";
 import { useRouter } from "next/navigation";
 import { FormContext } from "./context/FormContext";
 
 const BisDashboard = () => {
   const { selectedForms, setSelectedForms } = useContext(FormContext);
+  const {selectedDocuments,setSelectedDocuments} = useContext(FormContext);
   const router = useRouter();
 
-  const handleSubmit = () => {
-    if (selectedForms.length > 0) {
-      // Redirect to the dynamic form page
-      router.push("/formbis"); 
-    } else {
-      alert("Please select a form before submitting.");
-    }
-  };
-  
   const [selectedCheckboxes, setSelectedCheckboxes] = useState({
     form2: false,
     brandAuth: false,
@@ -35,10 +26,24 @@ const BisDashboard = () => {
     airNomination: "",
   });
 
+  // Handle form submission
+  const handleSubmit = () => {
+    if (selectedForms.length > 0) {
+      router.push("/formbis"); 
+    } else {
+      alert("Please select a form before submitting.");
+    }
+   
+    // Update selectedDocuments
+    setSelectedDocuments({
+      checkboxes: selectedCheckboxes,
+      radios: selectedRadios,
+    });
+  };  
+
+
   const handleTreeClick = (targetIds) => {
-    console.log("handleTreeClick");
-    console.log(targetIds);
-  
+
     const newCheckboxes = {
       form2: false,
       brandAuth: false,
@@ -65,7 +70,6 @@ const BisDashboard = () => {
   
     // Log the selected checkboxes and radios after processing targetIds
     console.log("QQQQ", newCheckboxes, newRadios);
-  
     setSelectedCheckboxes(newCheckboxes); // Update checkbox state
     setSelectedRadios(newRadios); // Update radio state
     updateSelectedForms(newCheckboxes, newRadios); // Call function to update selected forms
@@ -75,8 +79,6 @@ const BisDashboard = () => {
   const updateSelectedForms = (checkboxes, radios) => {
     const newForms = [];
     console.log("hfjf",checkboxes , radios);
-
-
 
     switch (true) {
       case radios.affidavit === "form3C" && checkboxes.brandAuth :
@@ -107,7 +109,6 @@ const BisDashboard = () => {
        newForms.push("3");
        break;
       
-     
        case checkboxes.unregTmr:
         newForms.push("2")
         break;
@@ -116,15 +117,11 @@ const BisDashboard = () => {
         newForms.push("1");
         break;
 
-
       default:
         break;
       
-      
     }
     
-   
-  
     setSelectedForms(newForms);
   };
   // Update checkbox state
@@ -351,11 +348,12 @@ const BisDashboard = () => {
 
         <button
           onClick={handleSubmit}
+          
           className="w-5/6 px-4 py-2 mb-8 text-center text-white bg-blue-500 rounded-md hover:bg-blue-600"
         >
           Submit
         </button>
-
+         
         <div className="text-center">
           <p className="text-gray-500">Scroll down for BIS docs tree chart</p>
           <p className="text-gray-500">

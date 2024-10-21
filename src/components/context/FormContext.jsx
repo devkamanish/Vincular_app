@@ -6,6 +6,10 @@ const FormContext = createContext();
 
 const FormProvider = ({ children }) => {
   const [selectedForms, setSelectedForms] = useState([]);
+  const [selectedDocuments, setSelectedDocuments] = useState({
+    checkboxes: {},
+    radios: {},
+  });
 
   const updateSelectedForms = (form) => {
     setSelectedForms((prevForms) => {
@@ -20,7 +24,7 @@ const FormProvider = ({ children }) => {
   
 
   return (
-    <FormContext.Provider value={{ selectedForms, setSelectedForms }}>
+    <FormContext.Provider value={{ selectedForms, setSelectedForms,selectedDocuments,setSelectedDocuments }}>
       {children}
     </FormContext.Provider>
   );

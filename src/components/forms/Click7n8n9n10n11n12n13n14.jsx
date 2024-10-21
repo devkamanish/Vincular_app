@@ -2,8 +2,10 @@
 "use client"
 import { useState } from "react";
 import GoToHome from "../GoToHome";
+import { useRouter } from "next/navigation";
 
 export default function Click7() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     manufacturerName: "",
     manufacturerAddress: "",
@@ -43,6 +45,7 @@ export default function Click7() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
+    router.push('/download')
   };
 
   return (

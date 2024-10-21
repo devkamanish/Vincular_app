@@ -2,8 +2,10 @@
 "use client"
 import { useState } from "react";
 import GoToHome from "../GoToHome";
+import { useRouter } from "next/navigation";
 
 export default function Click2() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     manufacturerName: "",
     manufacturerAddress: "",
@@ -38,6 +40,7 @@ export default function Click2() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
+    router.push('/download')
     // Handle form submission, e.g., send data to an API
   };  
 
