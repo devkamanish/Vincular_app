@@ -210,7 +210,7 @@ export default function Click1() {
           className="w-full p-3 text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
           onClick={handleDone}
         >
-          Done
+          Docs!
         </button>
       </form>
     </div>
