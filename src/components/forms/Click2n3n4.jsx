@@ -127,7 +127,7 @@ export default function Click2() {
           <label className="block text-gray-700 font-semibold mb-2">Brand Owner Signatory Name</label>
           <input
             type="text"
-            name="brandOwnerSigName"
+            name="brandOwnerSigName" 
             value={formData.brandOwnerSigName}
             onChange={handleChange}
             className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -140,19 +140,19 @@ export default function Click2() {
           <label className="block text-gray-700 font-semibold mb-2">Brand Owner Signatory Designation</label>
           <input
             type="text"
-            name="brand"
+            name="brandOwnerSigDesignation"
             value={formData.brandOwnerSigDesignation}
             onChange={handleChange}
             className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </div>
 
-        {/* Brand Owner Firm Name */}
+        {/* Brand Owner Firm Name */} 
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">Brand Owner Signatory Name</label>
+          <label className="block text-gray-700 font-semibold mb-2">Brand Owner Firm Name</label>
           <input
             type="text"
-            name="brandOwnerSigName"
+            name="brandOwnerFirmName"
             value={formData.brandOwnerFirmName}
             onChange={handleChange}
             className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -161,10 +161,10 @@ export default function Click2() {
 
         {/* Brand Owner Firm Address */}
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">Brand Owner Signatory Name</label>
+          <label className="block text-gray-700 font-semibold mb-2">Brand Owner Firm Address</label>
           <input
             type="text"
-            name="brandOwnerSigName"
+            name="brandOwnerFirmAddress"
             value={formData.brandOwnerFirmAddress}
             onChange={handleChange}
             className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
