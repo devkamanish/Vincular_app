@@ -106,8 +106,8 @@ export default function Click7() {
         <div className="mb-4">
           <label className="block text-gray-700 font-semibold mb-2">Manufacturer Signatory Phone No.</label>
           <input
-            type="number"
-            name="manufacturerSignatoryAge"
+            type="tel"
+            name="manufacturerSignatoryPhoneNo"
             value={formData.manufacturerSignatoryPhoneNo}
             onChange={handleChange}
             className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -119,7 +119,7 @@ export default function Click7() {
           <label className="block text-gray-700 font-semibold mb-2">Manufacturer Signatory Email-id</label>
           <input
             type="email"
-            name="manufacturerSignatoryAge"
+            name="manufacturerSignatoryEmail"
             value={formData.manufacturerSignatoryEmail}
             onChange={handleChange}
             className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -183,7 +183,7 @@ export default function Click7() {
           <label className="block text-gray-700 font-semibold mb-2">Brand Owner Firm Address</label>
           <input
             type="text"
-            name="brandOwnerFirmName"
+            name="brandOwnerFirmAddress"
             value={formData.brandOwnerFirmAddress}
             onChange={handleChange}
             className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -326,7 +326,7 @@ export default function Click7() {
          <div className="mb-4">
           <label className="block text-gray-700 font-semibold mb-2">IR Firm Phone No.</label>
           <input
-            type="number"
+            type="tel"
             name="irFirmPhoneNo"
             value={formData.irFirmPhoneNo}
             onChange={handleChange}
