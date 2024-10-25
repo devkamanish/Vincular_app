@@ -1,8 +1,9 @@
-
 "use client"
-import { useState } from "react";
+import { useState ,useContext} from "react";
 import GoToHome from "../GoToHome";
 import { useRouter } from "next/navigation";
+import { FormContext } from "../context/FormContext";
+
 
 export default function Click1() {
   const [formData, setFormData] = useState({
@@ -21,6 +22,7 @@ export default function Click1() {
     irSignatoryName: ""
   });
 
+  const { formsData,setFormsData } = useContext(FormContext);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,8 +34,11 @@ export default function Click1() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
     // Handle form submission, e.g., send data to an API
+    console.log('click one called',formData)
+    setFormsData(formData); 
+    console.log('click one called=>',formsData)
+  
   };
 
   const router = useRouter();

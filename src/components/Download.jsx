@@ -2,16 +2,30 @@
 import { useContext } from "react";
 import { FormContext } from "@/components/context/FormContext";
 import GoToHome from "./GoToHome";
+// import { generateDocxFile} from "./forms-docx-sample/formTwo";
+import { generateForm2Document} from "./forms-docx-sample/formTwo2";
 
 const DownloadPage = () => {
-  const { selectedDocuments } = useContext(FormContext);
+  const { selectedDocuments,formsData} = useContext(FormContext);
   const { checkboxes, radios } = selectedDocuments;
+ 
+ 
+
 
   const combinedDocuments = [
     ...Object.entries(checkboxes).filter(([key, value]) => value).map(([key]) => ({ type: 'checkbox', name: key,letterhead : "IR firm",signStamp : "Balbir Singh Bora" })),
     ...Object.entries(radios).filter(([key, value]) => value).map(([key]) => ({ type: 'radio', name: key,letterhead:"NA", signStamp :"Balbir " })),
   ];
 
+  // const generateDocx = () =>{
+  //   generateDocxFile(formsData,combinedDocuments);
+  // }
+
+  const generateDocx2 = ()=>{
+    generateForm2Document(formsData,combinedDocuments);
+    
+  }
+  
   return (
     <div className="flex justify-between items-start p-6 bg-white rounded-md shadow-md">
       {/* Left Side: Download Section */}
@@ -19,7 +33,7 @@ const DownloadPage = () => {
         <div className="flex items-center mb-4">
           <GoToHome/>
         </div>
-        <button className="bg-blue-600 text-white py-2 px-4 rounded-md mb-4 flex items-center">
+        <button className="bg-blue-600 text-white py-2 px-4 rounded-md mb-4 flex items-center" onClick={generateDocx2}>
           Click to download!
           <svg
             xmlns="http://www.w3.org/2000/svg"

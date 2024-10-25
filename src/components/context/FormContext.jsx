@@ -11,6 +11,9 @@ const FormProvider = ({ children }) => {
     radios: {},
   });
 
+  const [formsData, setFormsData] = useState({});
+  
+
   const updateSelectedForms = (form) => {
     setSelectedForms((prevForms) => {
       // Check if the form is already selected, if so, remove it
@@ -24,7 +27,7 @@ const FormProvider = ({ children }) => {
   
 
   return (
-    <FormContext.Provider value={{ selectedForms, setSelectedForms,selectedDocuments,setSelectedDocuments }}>
+    <FormContext.Provider value={{ selectedForms, setSelectedForms,selectedDocuments,setSelectedDocuments,formsData, setFormsData }}>
       {children}
     </FormContext.Provider>
   );
