@@ -6,6 +6,7 @@ import {
   Table,
   TableRow,
   TableCell,
+  AlignmentType,
 } from "docx";
 
 import { saveAs } from "file-saver";

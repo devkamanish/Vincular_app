@@ -5,6 +5,9 @@ import GoToHome from "./GoToHome";
 import { generateForm2Document} from "./forms-docx-sample/formTwo2";
 import { generateForm3Document } from "./forms-docx-sample/form3C";
 import {generateunRegTmDocument} from "./forms-docx-sample/unRegTm";
+import { generatebrandAuthdocument } from "./forms-docx-sample/brandAuth";
+import {generateFormIVFactoryDocument} from "./forms-docx-sample/form4Factory";
+import { generateForm3B2Document } from "./forms-docx-sample/form3B2";
 
 const DownloadPage = () => {
   const { selectedDocuments,formsData} = useContext(FormContext);
@@ -25,7 +28,7 @@ const DownloadPage = () => {
   // }
 
   const generateDoxcform = ()=>{
-   generateunRegTmDocument(formsData,combinedDocuments);
+    generateForm3B2Document(formsData);
   }
   
   return (

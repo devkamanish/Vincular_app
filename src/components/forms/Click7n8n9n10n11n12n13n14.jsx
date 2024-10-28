@@ -1,8 +1,10 @@
 
 "use client"
-import { useState } from "react";
+import { useState ,useContext} from "react";
 import GoToHome from "../GoToHome";
 import { useRouter } from "next/navigation";
+import { FormContext } from "../context/FormContext";
+
 
 export default function Click7() {
   const router = useRouter();
