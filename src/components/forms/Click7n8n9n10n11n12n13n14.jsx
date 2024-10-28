@@ -34,6 +34,8 @@ export default function Click7() {
     irFirmEmail:"",
   });
 
+  const { formsData,setFormsData } = useContext(FormContext);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -45,6 +47,7 @@ export default function Click7() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
+    setFormsData(formData); 
     router.push('/download')
   };
 

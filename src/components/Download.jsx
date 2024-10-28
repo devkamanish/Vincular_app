@@ -2,28 +2,30 @@
 import { useContext } from "react";
 import { FormContext } from "@/components/context/FormContext";
 import GoToHome from "./GoToHome";
-// import { generateDocxFile} from "./forms-docx-sample/formTwo";
 import { generateForm2Document} from "./forms-docx-sample/formTwo2";
+import { generateForm3Document } from "./forms-docx-sample/form3C";
+import {generateunRegTmDocument} from "./forms-docx-sample/unRegTm";
 
 const DownloadPage = () => {
   const { selectedDocuments,formsData} = useContext(FormContext);
   const { checkboxes, radios } = selectedDocuments;
  
- 
-
-
   const combinedDocuments = [
     ...Object.entries(checkboxes).filter(([key, value]) => value).map(([key]) => ({ type: 'checkbox', name: key,letterhead : "IR firm",signStamp : "Balbir Singh Bora" })),
     ...Object.entries(radios).filter(([key, value]) => value).map(([key]) => ({ type: 'radio', name: key,letterhead:"NA", signStamp :"Balbir " })),
   ];
-
+  
   // const generateDocx = () =>{
   //   generateDocxFile(formsData,combinedDocuments);
   // }
 
-  const generateDocx2 = ()=>{
-    generateForm2Document(formsData,combinedDocuments);
+  // const generateDocx2 = ()=>{
+  //   generateForm2Document(formsData,combinedDocuments);
     
+  // }
+
+  const generateDoxcform = ()=>{
+   generateunRegTmDocument(formsData,combinedDocuments);
   }
   
   return (
@@ -33,7 +35,7 @@ const DownloadPage = () => {
         <div className="flex items-center mb-4">
           <GoToHome/>
         </div>
-        <button className="bg-blue-600 text-white py-2 px-4 rounded-md mb-4 flex items-center" onClick={generateDocx2}>
+        <button className="bg-blue-600 text-white py-2 px-4 rounded-md mb-4 flex items-center" onClick={generateDoxcform}>
           Click to download!
           <svg
             xmlns="http://www.w3.org/2000/svg"

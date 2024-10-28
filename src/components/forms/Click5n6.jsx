@@ -1,6 +1,6 @@
 
 "use client"
-import { useState } from "react";
+import { useState,useContext } from "react";
 import GoToHome from "../GoToHome";
 import { useRouter } from "next/navigation";
 
@@ -31,6 +31,8 @@ export default function Click4() {
     irFirmEmail:"",
   });
 
+  const { formsData,setFormsData } = useContext(FormContext);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -42,6 +44,7 @@ export default function Click4() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
+    setFormsData(formData); 
     router.push('/download')
   };
 

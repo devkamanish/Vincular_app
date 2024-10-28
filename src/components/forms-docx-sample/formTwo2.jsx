@@ -1,4 +1,3 @@
-// Modified form2Template.js to match the image form structure
 import {
   Document,
   Packer,
@@ -66,7 +65,7 @@ export const generateForm2Document = async (formsData) => {
               ],
               break: 1,
             }),
-
+            
             // Product Details
             new Paragraph({
               children: [
@@ -113,7 +112,7 @@ export const generateForm2Document = async (formsData) => {
                 }),
               ],
             }),
-
+            
             // Product Details Table
             new Table({
               rows: [
