@@ -11,16 +11,12 @@ export const generateForm3B2Document = async (formsData) => {
   const {
     irSignatoryName,
     irSignatoryAge,
-    irirFirmName,
     irFirmAddress,
     irSignatoryDesignation,
     isStandard,
-
     irFirmName,
-
     manufacturerAddress,
     manufacturerName,
-
     productName,
     brand,
 
@@ -194,7 +190,7 @@ export const generateForm3B2Document = async (formsData) => {
                   break: 2,
                 }),
               ],
-              alignment: "center",
+              alignment: "center",  
             }),
 
             // Alternative Clause 3
@@ -382,8 +378,9 @@ export const generateForm3B2Document = async (formsData) => {
     });
 
     const blob = await Packer.toBlob(doc);
-    saveAs(blob, `Form_III_B_${new Date().toISOString().split('T')[0]}.docx`);
+    saveAs(blob, `Form_III_B_2_${new Date().toISOString().split('T')[0]}.docx`);
   } catch (error) {
     console.error("Error generating DOCX file:", error);
   }
 };
+

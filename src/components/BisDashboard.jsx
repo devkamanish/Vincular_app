@@ -303,7 +303,7 @@ const BisDashboard = () => {
                   className="mr-2"
                   id="form4B"
                 />
-                Form-IV Nomination - Proprietor/Registered User
+                Form-IV Nomination - Proprietor/Registered User/subsidiary firm/liaison office of the Brand/Trademark
               </label>
               <label className="flex items-center">
                 <input

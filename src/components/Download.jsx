@@ -8,6 +8,11 @@ import {generateunRegTmDocument} from "./forms-docx-sample/unRegTm";
 import { generatebrandAuthdocument } from "./forms-docx-sample/brandAuth";
 import {generateFormIVFactoryDocument} from "./forms-docx-sample/form4Factory";
 import { generateForm3B2Document } from "./forms-docx-sample/form3B2";
+import {generateForm3B1Document} from "./forms-docx-sample/form3B1"
+import {generateForm3ADocument} from "./forms-docx-sample/form3A";
+import {generateForm4BrandDocument} from "./forms-docx-sample/form4Brand";
+import { generateForm4ThirdPartyDocument } from "./forms-docx-sample/form4ThirdParty";
+import  {generateNonexistenceDocument} from "./forms-docx-sample/Nonexistence";
 
 const DownloadPage = () => {
   const { selectedDocuments,formsData} = useContext(FormContext);
@@ -28,7 +33,7 @@ const DownloadPage = () => {
   // }
 
   const generateDoxcform = ()=>{
-    generateForm3B2Document(formsData);
+    generateNonexistenceDocument(formsData);
   }
   
   return (
