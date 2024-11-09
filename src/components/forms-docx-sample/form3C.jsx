@@ -12,7 +12,7 @@
   
   import { saveAs } from "file-saver";
   
-  export const generateForm3Document = async (formsData) => {
+  export const generateForm3CDocument = async (formsData) => {
     const {
         manufacturerName,
         manufacturerAddress,

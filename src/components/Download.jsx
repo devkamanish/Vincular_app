@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { FormContext } from "@/components/context/FormContext";
 import GoToHome from "./GoToHome";
 import { generateForm2Document} from "./forms-docx-sample/formTwo2";
-import { generateForm3Document } from "./forms-docx-sample/form3C";
+import { generateForm3CDocument, generateForm3Document } from "./forms-docx-sample/form3C";
 import {generateunRegTmDocument} from "./forms-docx-sample/unRegTm";
 import { generatebrandAuthdocument } from "./forms-docx-sample/brandAuth";
 import {generateFormIVFactoryDocument} from "./forms-docx-sample/form4Factory";
@@ -13,6 +13,7 @@ import {generateForm3ADocument} from "./forms-docx-sample/form3A";
 import {generateForm4BrandDocument} from "./forms-docx-sample/form4Brand";
 import { generateForm4ThirdPartyDocument } from "./forms-docx-sample/form4ThirdParty";
 import  {generateNonexistenceDocument} from "./forms-docx-sample/Nonexistence";
+import { generateDocxFile } from "./forms-docx-sample/formTwo";
 
 const DownloadPage = () => {
   const { selectedDocuments,formsData} = useContext(FormContext);
@@ -24,7 +25,7 @@ const DownloadPage = () => {
   ];
   
   // const generateDocx = () =>{
-  //   generateDocxFile(formsData,combinedDocuments);
+  //   generateDocxFile(formsData,combinedDocuments); 
   // }
 
   // const generateDocx2 = ()=>{
@@ -32,6 +33,39 @@ const DownloadPage = () => {
     
   // }
 
+  
+  
+  const downloadForm =(formName) =>{
+    switch (formName) {
+      case 'form2':
+        generateForm2Document(formsData,combinedDocuments)
+        console.log(formName)
+        break;
+      case "brandAuth":
+        generatebrandAuthdocument(formsData, combinedDocuments)
+        break;
+
+      case 'unregTmr':
+        generateunRegTmDocument(formsData,combinedDocuments)
+        break; 
+
+      case "nonexistenceBrand":
+        generateNonexistenceDocument(formsData,combinedDocuments)
+        break;
+
+       case "form4A":
+        generateFormIVFactoryDocument(formsData,combinedDocuments)
+        console.log("hey hey 4a")
+        break; 
+        
+      default:
+        break;
+    }
+  }
+  
+
+
+  
   const generateDoxcform = ()=>{
     generateNonexistenceDocument(formsData);
   }
@@ -63,14 +97,19 @@ const DownloadPage = () => {
         </button>
         <table className="min-w-full text-left text-sm">
           <tbody>
-            {combinedDocuments.map(({ name }, index) => (
-              <tr key={index} className="border-t">
-                <td className="py-2 px-2">{index + 1}.</td>
-                <td className="py-2">{name}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        {combinedDocuments.map(({ name }, index) => (
+        <tr 
+          key={index} 
+          className="border-t cursor-pointer" 
+          onClick={()=>{downloadForm(name)}}
+        >
+        <td className="py-2 px-2">{index + 1}.</td>
+        <td className="py-2">{name}</td>
+        </tr>
+        ))}
+        </tbody>
+      </table>
+
       </div>
 
       {/* Right Side: Document Table */}

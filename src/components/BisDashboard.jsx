@@ -40,7 +40,7 @@ const BisDashboard = () => {
       radios: selectedRadios,
     });
   };  
-
+  
 
   const handleTreeClick = (targetIds) => {
 
@@ -67,11 +67,10 @@ const BisDashboard = () => {
         }
       }
     });
-  
-    // Log the selected checkboxes and radios after processing targetIds
+    
     console.log("QQQQ", newCheckboxes, newRadios);
-    setSelectedCheckboxes(newCheckboxes); // Update checkbox state
-    setSelectedRadios(newRadios); // Update radio state
+    setSelectedCheckboxes(newCheckboxes); 
+    setSelectedRadios(newRadios); //
     updateSelectedForms(newCheckboxes, newRadios); // Call function to update selected forms
   };
   
@@ -84,7 +83,7 @@ const BisDashboard = () => {
       case radios.affidavit === "form3C" && checkboxes.brandAuth :
         newForms.push("2");
         break;
-
+          
       case checkboxes.unregTmr && radios.affidavit === "form3A":
         newForms.push("4");
         break;
@@ -379,3 +378,4 @@ const BisDashboard = () => {
 };
 
 export default BisDashboard;
+
