@@ -32,7 +32,23 @@ export const generateForm2Document = async (formsData) => {
       sections: [
         {
           children: [
-            // Title
+            // Letterhead
+            new Paragraph({
+              children: [
+                new TextRun({
+                  text:  "To be issued on IR Firm letter head",
+                  bold: true,
+                  // color: "008000", 
+                  size: 26,
+                  highlight : "yellow",
+                }),
+              ],
+              alignment: "center",
+              spacing: {
+                after: 300,
+              },
+            }),
+
             new Paragraph({
               children: [
                 new TextRun({
@@ -104,8 +120,12 @@ export const generateForm2Document = async (formsData) => {
             new Paragraph({
               children: [
                 new TextRun({
-                  text: `We, ${manufacturerName}, have applied to BIS for a grant of licence for self-declaration of conformity on the above product(s). We, as the responsible party for regulatory compliance, declare under sole responsibility that the described product is in conformity with ${isStandard}.`,
+                  text: `We, ${manufacturerName}, have applied to BIS for a grant of licence for self-declaration of conformity on the above product(s). We, as the responsible party for regulatory compliance, declare under sole responsibility that the described product is in conformity with `,
                   break: 1,
+                }),
+                new TextRun({
+                  text :`${isStandard}.`,
+                  bold : true,
                 }),
                 new TextRun({
                   text: `Further the following submitted by us has been perused by us thoroughly clause by clause against ${isStandard} or each requirement.`,
@@ -195,8 +215,12 @@ export const generateForm2Document = async (formsData) => {
                   break: 1,
                 }),
                 new TextRun({
-                  text: `Name: ${irSignatoryName}`,
+                  text: `Name: `,
                   break: 1,
+                }),
+                new TextRun({
+                  text : irSignatoryName,
+                  bold : true,
                 }),
                 new TextRun({
                   text: "(Applicant/Authorized representative of Indian entity filling application)",
@@ -204,10 +228,13 @@ export const generateForm2Document = async (formsData) => {
                 }),
                 new TextRun({
                   text: "Date: ______________",
-                  break: 1,
+                  break: 1.3,
+                  highlight: "yellow",
                 }),
                 new TextRun({
+                  break :1.3,
                   text: "Place: ______________",
+                  highlight: "yellow",
                 }),
               ],
             }),
@@ -217,8 +244,10 @@ export const generateForm2Document = async (formsData) => {
     });
 
     const blob = await Packer.toBlob(doc);
-    saveAs(blob, `${productName || 'document'}_${new Date().toISOString().split('T')[0]}.docx`);
+    saveAs(blob, `Form-II_${new Date().toISOString().split('T')[0]}.docx`);
   } catch (error) {
     console.error("Error generating DOCX file:", error);
   }
 };
+
+

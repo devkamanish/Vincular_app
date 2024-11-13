@@ -18,24 +18,18 @@ import { generateDocxFile } from "./forms-docx-sample/formTwo";
 const DownloadPage = () => {
   const { selectedDocuments,formsData} = useContext(FormContext);
   const { checkboxes, radios } = selectedDocuments;
- 
+   
+
   const combinedDocuments = [
     ...Object.entries(checkboxes).filter(([key, value]) => value).map(([key]) => ({ type: 'checkbox', name: key,letterhead : "IR firm",signStamp : "Balbir Singh Bora" })),
     ...Object.entries(radios).filter(([key, value]) => value).map(([key]) => ({ type: 'radio', name: key,letterhead:"NA", signStamp :"Balbir " })),
   ];
   
-  // const generateDocx = () =>{
-  //   generateDocxFile(formsData,combinedDocuments); 
-  // }
-
-  // const generateDocx2 = ()=>{
-  //   generateForm2Document(formsData,combinedDocuments);
-    
-  // }
-
   
+
   
   const downloadForm =(formName) =>{
+    console.log("Selected form: ",formName);
     switch (formName) {
       case 'form2':
         generateForm2Document(formsData,combinedDocuments)
@@ -53,11 +47,16 @@ const DownloadPage = () => {
         generateNonexistenceDocument(formsData,combinedDocuments)
         break;
 
-       case "form4A":
+       case "airNomination":
         generateFormIVFactoryDocument(formsData,combinedDocuments)
         console.log("hey hey 4a")
         break; 
-        
+
+        case "affidavit" :
+          generateForm3ADocument(formsData,combinedDocuments)
+          console.log("happ coding")
+          break;
+          
       default:
         break;
     }
@@ -132,9 +131,13 @@ const DownloadPage = () => {
               <tr key={index} className="border-t">
                 <td className="border border-gray-300 p-2">{index + 1}</td>
                 <td className="border border-gray-300 p-2">{doc.name}</td>
-                <td className="border border-gray-300 p-2">{doc.letterhead}</td>
-                <td className="border border-gray-300 p-2">{doc.signStamp}</td>
-              </tr>
+                {/* <td className="border border-gray-300 p-2">{doc.letterhead}</td> */}
+                <td className="border border-gray-300 p-2">{doc.letterhead || formsData.letterhead || "N/A"}</td> {/* Render letterhead here */}
+
+                <td className="border border-gray-300 p-2">{formsData.irSignatoryName || "N/A"}</td>
+                </tr>
+                
+                
             ))}
           </tbody>
         </table>
@@ -150,5 +153,4 @@ const DownloadPage = () => {
 
 
 export default DownloadPage;
-
 

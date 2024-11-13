@@ -68,6 +68,7 @@ const BisDashboard = () => {
       }
     });
     
+    
     console.log("QQQQ", newCheckboxes, newRadios);
     setSelectedCheckboxes(newCheckboxes); 
     setSelectedRadios(newRadios); //

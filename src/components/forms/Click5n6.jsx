@@ -38,7 +38,7 @@ export default function Click4() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
-      ...prevData,
+      ...prevData,  
       [name]: value
     }));
   };

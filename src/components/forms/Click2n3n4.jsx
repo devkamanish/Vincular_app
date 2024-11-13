@@ -29,7 +29,7 @@ export default function Click2() {
     reportDate: "",
     irSignatoryName: ""
   });
-
+  
   const { formsData,setFormsData } = useContext(FormContext);
 
   const handleChange = (e) => {

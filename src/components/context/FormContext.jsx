@@ -9,8 +9,9 @@ const FormProvider = ({ children }) => {
   const [selectedDocuments, setSelectedDocuments] = useState({
     checkboxes: {},
     radios: {},
+    formsData :{},
   });
-
+  
   const [formsData, setFormsData] = useState({});
   
 
@@ -23,7 +24,7 @@ const FormProvider = ({ children }) => {
       return [...prevForms, form];
     });
   };
-
+ 
   
 
   return (
