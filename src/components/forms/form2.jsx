@@ -1,22 +1,17 @@
-
 "use client"
-import { useState,useContext } from "react";
+import { useState ,useContext} from "react";
 import GoToHome from "../GoToHome";
 import { useRouter } from "next/navigation";
 import { FormContext } from "../context/FormContext";
 
 
-export default function Click4() {
-  const router = useRouter();
-
+export default function Click1() {
   const [formData, setFormData] = useState({
     manufacturerName: "",
     manufacturerAddress: "",
     manufacturerSignatoryName: "",
     manufacturerSignatoryDesignation: "",
-    manufacturerSignatoryPhoneNo:"",
-    manufacturerSignatoryEmail:"",
-
+    manufacturerSignatoryAge: "",
     brand: "",
     productName: "",
     modelNo: "",
@@ -24,13 +19,7 @@ export default function Click4() {
     labName: "",
     reportNo: "",
     reportDate: "",
-    irSignatoryName: "",
-    irSignatoryDesignation :"",
-    irSignatoryAge:"",
-    irFirmName:"",
-    irFirmAddress:"",
-    irFirmPhoneNo:"",
-    irFirmEmail:"",
+    irSignatoryName: ""
   });
 
   const { formsData,setFormsData } = useContext(FormContext);
@@ -38,27 +27,35 @@ export default function Click4() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
-      ...prevData,  
+      ...prevData,
       [name]: value
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    // Handle form submission, e.g., send data to an API
+    console.log('click one called',formData)
     setFormsData(formData); 
-    router.push('/download')
+    console.log('click one called=>',formsData)
+  
   };
 
+  const router = useRouter();
+
+  const handleDone = () => {
+    router.push('/download')
+  }
+
   return (
-    <div className="max-w-2xl mx-auto p-4 bg-white rounded-lg shadow-md">
-      
-      <h1 className="text-3xl font-bold mb-6 text-center ">Please fill the form!</h1>
-      <GoToHome/>
+    <div className="max-w-2xl p-4 mx-auto bg-white rounded-lg shadow-md">
+
+      <h1 className="mb-6 text-3xl font-bold text-center ">Please fill the form!</h1>
+      <GoToHome />
       <form onSubmit={handleSubmit}>
         {/* Manufacturer Name */}
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-1 mt-4">Manufacturer Name</label>
+          <label className="block mt-4 mb-1 font-semibold text-gray-700">Manufacturer Name</label>
           <input
             type="text"
             name="manufacturerName"
@@ -67,10 +64,10 @@ export default function Click4() {
             className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </div>
-    
+
         {/* Manufacturer Address */}
         <div className="mb-4">
-         <label className="block text-gray-700 font-semibold mb-2">Manufacturer Address</label>
+          <label className="block mb-2 font-semibold text-gray-700">Manufacturer Address</label>
           <input
             type="text"
             name="manufacturerAddress"
@@ -82,7 +79,7 @@ export default function Click4() {
 
         {/* Manufacturer Signatory Name */}
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">Manufacturer Signatory Name</label>
+          <label className="block mb-2 font-semibold text-gray-700">Manufacturer Signatory Name</label>
           <input
             type="text"
             name="manufacturerSignatoryName"
@@ -94,7 +91,7 @@ export default function Click4() {
 
         {/* Manufacturer Signatory Designation */}
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">Manufacturer Signatory Designation</label>
+          <label className="block mb-2 font-semibold text-gray-700">Manufacturer Signatory Designation</label>
           <input
             type="text"
             name="manufacturerSignatoryDesignation"
@@ -104,35 +101,21 @@ export default function Click4() {
           />
         </div>
 
-        {/* Manufacturer Signatory Phone no*/}
+        {/* Manufacturer Signatory Age */}
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">Manufacturer Signatory Phone No.</label>
+          <label className="block mb-2 font-semibold text-gray-700">Manufacturer Signatory Age</label>
           <input
-            type="tel"
-            name="manufacturerSignatoryPhoneNo"
-            value={formData.manufacturerSignatoryPhoneNo}
+            type="number"
+            name="manufacturerSignatoryAge"
+            value={formData.manufacturerSignatoryAge}
             onChange={handleChange}
             className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </div>
-
-          {/* Manufacturer Signatory Email id*/}
-          <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">Manufacturer Signatory Email-id</label>
-          <input
-            type="email"
-            name="manufacturerSignatoryEmail"
-            value={formData.manufacturerSignatoryEmail}
-            onChange={handleChange}
-            className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-          />
-        </div>
-
-
 
         {/* Brand */}
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">Brand</label>
+          <label className="block mb-2 font-semibold text-gray-700">Brand</label>
           <input
             type="text"
             name="brand"
@@ -142,10 +125,9 @@ export default function Click4() {
           />
         </div>
 
-
         {/* Product Name */}
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">Product Name</label>
+          <label className="block mb-2 font-semibold text-gray-700">Product Name</label>
           <input
             type="text"
             name="productName"
@@ -157,7 +139,7 @@ export default function Click4() {
 
         {/* Model No. */}
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">Model No.</label>
+          <label className="block mb-2 font-semibold text-gray-700">Model No.</label>
           <input
             type="text"
             name="modelNo"
@@ -169,7 +151,7 @@ export default function Click4() {
 
         {/* IS Standard */}
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">IS Standard</label>
+          <label className="block mb-2 font-semibold text-gray-700">IS Standard</label>
           <input
             type="text"
             name="isStandard"
@@ -181,7 +163,7 @@ export default function Click4() {
 
         {/* Lab Name */}
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">Lab Name</label>
+          <label className="block mb-2 font-semibold text-gray-700">Lab Name</label>
           <input
             type="text"
             name="labName"
@@ -193,7 +175,7 @@ export default function Click4() {
 
         {/* Report No. */}
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">Report No.</label>
+          <label className="block mb-2 font-semibold text-gray-700">Report No.</label>
           <input
             type="text"
             name="reportNo"
@@ -205,7 +187,7 @@ export default function Click4() {
 
         {/* Report Date */}
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">Report Date</label>
+          <label className="block mb-2 font-semibold text-gray-700">Report Date</label>
           <input
             type="date"
             name="reportDate"
@@ -217,7 +199,7 @@ export default function Click4() {
 
         {/* IR Signatory Name */}
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">IR Signatory Name</label>
+          <label className="block mb-2 font-semibold text-gray-700">IR Signatory Name</label>
           <input
             type="text"
             name="irSignatoryName"
@@ -227,94 +209,17 @@ export default function Click4() {
           />
         </div>
 
-         {/* IR Signatory Designation */}
-         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">IR Signatory Designation</label>
-          <input
-            type="text"
-            name="irSignatoryDesignation"
-            value={formData.irSignatoryDesignation}
-            onChange={handleChange}
-            className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-          />
-        </div>
-
-        {/* IR Signatory age */}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">IR Signatory Age</label>
-          <input
-            type="number"
-            name="irSignatoryAge"
-            value={formData.irSignatoryAge}
-            onChange={handleChange}
-            className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-          />
-        </div>
-
-        {/* IR  Firm Name */}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">IR Firm Name</label>
-          <input
-            type="text"
-            name="irFirmName"
-            value={formData.irFirmName}
-            onChange={handleChange}
-            className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-          />
-        </div>
-
-         {/* IR Firm Address */}
-         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">IR Firm Address</label>
-          <input
-            type="text"
-            name="irFirmAddress"
-            value={formData.irFirmAddress}
-            onChange={handleChange}
-            className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-          />
-        </div>
-
-         {/* IR  Firm Phone no */}
-         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">IR Firm Phone No.</label>
-          <input
-            type="tel"
-            name="irFirmPhoneNo"
-            value={formData.irFirmPhoneNo}
-            onChange={handleChange}
-            className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-          />
-        </div>
-
-
-       {/* IR firm Email id */}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">IR Firm Email-Id</label>
-          <input
-            type="email"
-            name="irFirmEmail"
-            value={formData.irFirmEmail}
-            onChange={handleChange}
-            className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-          />
-        </div>
-
-
-        {/* Docs Button */}
+        {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
+          className="w-full p-3 text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
+          onClick={handleDone}
         >
-        Docs!
+          Docs!
         </button>
       </form>
     </div>
   );
 }
-
-
-
-
 
 

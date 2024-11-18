@@ -20,12 +20,13 @@ const BisDashboard = () => {
     factoryAuth: false,
     irSignAuth: false,
   });
+  const [selectedAirNomination, setSelectedAirNomination] = useState(null);
 
   const [selectedRadios, setSelectedRadios] = useState({
     affidavit: "",
     airNomination: "",
   });
-
+    
   // Handle form submission
   const handleSubmit = () => {
     if (selectedForms.length > 0) {
@@ -53,32 +54,30 @@ const BisDashboard = () => {
       irSignAuth: false,
     };
     
-    const newRadios = { ...selectedRadios }; // Create a new variable to hold updated radios
+    const newRadios = { ...selectedRadios }; 
   
     targetIds.forEach((id) => {
       if (newCheckboxes.hasOwnProperty(id)) {
-        newCheckboxes[id] = true; // Update checkbox state
+        newCheckboxes[id] = true; 
       } else {
-        // Update radio states based on the ID
+
         if (id.startsWith("form3")) {
-          newRadios.affidavit = id; // Set affidavit radio
+          newRadios.affidavit = id; 
         } else if (id.startsWith("form4")) {
-          newRadios.airNomination = id; // Set air nomination radio
+          newRadios.airNomination = id; 
         }
       }
     });
     
     
-    console.log("QQQQ", newCheckboxes, newRadios);
     setSelectedCheckboxes(newCheckboxes); 
     setSelectedRadios(newRadios); //
-    updateSelectedForms(newCheckboxes, newRadios); // Call function to update selected forms
+    updateSelectedForms(newCheckboxes, newRadios); 
   };
   
 
   const updateSelectedForms = (checkboxes, radios) => {
     const newForms = [];
-    console.log("hfjf",checkboxes , radios);
 
     switch (true) {
       case radios.affidavit === "form3C" && checkboxes.brandAuth :
@@ -130,6 +129,8 @@ const BisDashboard = () => {
     setSelectedCheckboxes((prev) => ({ ...prev, [id]: checked }));
     console.log(selectedCheckboxes);
   };
+
+
 
   // Update radio button state
   const handleRadioChange = (event) => {
@@ -281,7 +282,7 @@ const BisDashboard = () => {
               </label>
             </div>
           </div>
-
+    
           {/* Right  */}
           <div className="w-1/3 p-6 bg-white rounded-lg shadow-md">
             <h2 className="mb-2 text-xl font-semibold">AIR Nomination</h2>
@@ -292,6 +293,7 @@ const BisDashboard = () => {
                   name="air-nomination"
                   className="mr-2"
                   id="form4A"
+                  
                 />
                 Form-IV Nomination - Factory liaison office/subsidiary
                 firm/branch office
@@ -333,7 +335,7 @@ const BisDashboard = () => {
               Report
             </span>
           </label>
-
+        
           <label className="flex items-center space-x-2">
             <input
               type="checkbox"
@@ -380,3 +382,5 @@ const BisDashboard = () => {
 
 export default BisDashboard;
 
+
+  

@@ -11,7 +11,7 @@ import {
 
 import { saveAs } from "file-saver";
 
-export const generateForm2Document = async (formsData) => {
+export const generateForm2Document = async (formsData,letterhead) => {
   const {
     manufacturerName,
     manufacturerAddress,
@@ -36,7 +36,7 @@ export const generateForm2Document = async (formsData) => {
             new Paragraph({
               children: [
                 new TextRun({
-                  text:  "To be issued on IR Firm letter head",
+                  text: letterhead || "To be issued on IR Firm letter head",
                   bold: true,
                   // color: "008000", 
                   size: 26,

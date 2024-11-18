@@ -12,3 +12,4 @@ const FormTec = () => {
 
 export default FormTec
 
+

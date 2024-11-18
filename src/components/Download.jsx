@@ -20,13 +20,38 @@ const DownloadPage = () => {
   const { checkboxes, radios } = selectedDocuments;
    
 
+  const getLetterhead = (docType) => {
+    switch (docType) {
+      case 'form2':
+        return 'IR Firm by me';
+      case 'brandAuth':
+        return 'Brand Authorization Firm';
+      case 'unregTmr':
+        return 'Unregistered Trademark';
+      case 'affidavit':
+        return 'Affidavit Document';
+
+        case "airNomination":
+        return "No problem";
+      default:
+        return 'N/A';
+    }
+  };
+
+
+  
+
   const combinedDocuments = [
-    ...Object.entries(checkboxes).filter(([key, value]) => value).map(([key]) => ({ type: 'checkbox', name: key,letterhead : "IR firm",signStamp : "Balbir Singh Bora" })),
-    ...Object.entries(radios).filter(([key, value]) => value).map(([key]) => ({ type: 'radio', name: key,letterhead:"NA", signStamp :"Balbir " })),
+    ...Object.entries(checkboxes)
+    .filter(([key, value]) => value)
+    .map(([key]) => ({ type: 'checkbox', name: key,letterhead : getLetterhead(key), signStamp : "Balbir Singh Bora" })),
+
+    ...Object.entries(radios)
+    .filter(([key, value]) => value)
+    .map(([key]) => ({ type: 'radio', name: key,letterhead: getLetterhead(key), signStamp :"Balbir " })),
   ];
   
   
-
   
   const downloadForm =(formName) =>{
     console.log("Selected form: ",formName);
@@ -127,17 +152,18 @@ const DownloadPage = () => {
             </tr>
           </thead>
           <tbody>
-            {combinedDocuments.map((doc, index) => (
+
+            {combinedDocuments.map((doc, index,letterhead) => (
               <tr key={index} className="border-t">
                 <td className="border border-gray-300 p-2">{index + 1}</td>
                 <td className="border border-gray-300 p-2">{doc.name}</td>
                 {/* <td className="border border-gray-300 p-2">{doc.letterhead}</td> */}
-                <td className="border border-gray-300 p-2">{doc.letterhead || formsData.letterhead || "N/A"}</td> {/* Render letterhead here */}
+                <td className="border border-gray-300 p-2">{doc.letterhead || "N/A"}</td> 
 
                 <td className="border border-gray-300 p-2">{formsData.irSignatoryName || "N/A"}</td>
                 </tr>
-                
-                
+
+
             ))}
           </tbody>
         </table>
