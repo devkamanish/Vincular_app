@@ -19,6 +19,8 @@ const BisDashboard = () => {
     nonexistenceBrand: false,
     factoryAuth: false,
     irSignAuth: false,
+    annexure1:false,
+    form6 : false,
   });
   const [selectedAirNomination, setSelectedAirNomination] = useState(null);
 
@@ -52,6 +54,8 @@ const BisDashboard = () => {
       nonexistenceBrand: false,
       factoryAuth: false,
       irSignAuth: false,
+      annexure1:false,
+      form6 : false,
     };
     
     const newRadios = { ...selectedRadios }; 
@@ -135,12 +139,18 @@ const BisDashboard = () => {
   // Update radio button state
   const handleRadioChange = (event) => {
     const { id } = event.target;
-    setSelectedRadios((prev) => ({ ...prev, affidavit: id }));
+    setSelectedRadios((prev) => ({ ...prev, affidavit: id, }));
     console.log(selectedRadios);
   };
 
+  const handleRadioChangeAir = (event)=>{
+    const {id} = event.target;
+    setSelectedRadios((prev)=>({...prev,airNomination:id,}));
+  }
+
   return (
     <>
+
       <div className="flex flex-col items-center min-h-screen py-10 bg-gray-100 ">
         <h1 className="mt-0 mb-4 text-4xl font-bold">BIS Docs</h1>
 
@@ -290,9 +300,12 @@ const BisDashboard = () => {
               <label className="flex items-center">
                 <input
                   type="radio"
-                  name="air-nomination"
+                  name="airNomination"
                   className="mr-2"
                   id="form4A"
+                  checked={selectedRadios.airNomination === "form4A"}
+                  onChange={handleRadioChangeAir}
+
                   
                 />
                 Form-IV Nomination - Factory liaison office/subsidiary
@@ -301,18 +314,24 @@ const BisDashboard = () => {
               <label className="flex items-center">
                 <input
                   type="radio"
-                  name="air-nomination"
+                  name="airNomination"
                   className="mr-2"
                   id="form4B"
+                  checked={selectedRadios.airNomination === "form4B"}
+                  onChange={handleRadioChangeAir}
+
                 />
                 Form-IV Nomination - Proprietor/Registered User/subsidiary firm/liaison office of the Brand/Trademark
               </label>
               <label className="flex items-center">
                 <input
                   type="radio"
-                  name="air-nomination"
+                  name="airNomination"
                   className="mr-2"
                   id="form4C"
+                  checked={selectedRadios.airNomination === "form4C"}
+                  onChange={handleRadioChangeAir}
+
                 />
                 Form-IV Nomination - Major importer/distributor
               </label>
@@ -329,6 +348,9 @@ const BisDashboard = () => {
               type="checkbox"
               className="w-5 h-5 border rounded"
               id="form6"
+
+              checked={selectedCheckboxes.form6}
+              onChange={handleCheckboxChange}
             />
             <span className="text-gray-700">
               Form-VI-Application for Renewal of Licence & Production Plan
@@ -341,6 +363,9 @@ const BisDashboard = () => {
               type="checkbox"
               className="w-5 h-5 border rounded"
               id="annexure1"
+          
+              checked={selectedCheckboxes.annexure1}
+              onChange={handleCheckboxChange}
             />
             <span className="text-gray-700">Annexure-1-Distributors List</span>
           </label>
