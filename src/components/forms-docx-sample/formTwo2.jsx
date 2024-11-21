@@ -245,6 +245,7 @@ export const generateForm2Document = async (formsData,letterhead) => {
 
     const blob = await Packer.toBlob(doc);
     saveAs(blob, `Form-II_${new Date().toISOString().split('T')[0]}.docx`);
+    return blob;
   } catch (error) {
     console.error("Error generating DOCX file:", error);
   }

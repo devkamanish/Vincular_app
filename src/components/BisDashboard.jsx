@@ -8,8 +8,9 @@ import { useRouter } from "next/navigation";
 import { FormContext } from "./context/FormContext";
 
 const BisDashboard = () => {
-  const { selectedForms, setSelectedForms } = useContext(FormContext);
-  const {selectedDocuments,setSelectedDocuments} = useContext(FormContext);
+  const { selectedForms, setSelectedForms,setFormsData } = useContext(FormContext);
+  const { selectedDocuments, setSelectedDocuments } = useContext(FormContext);
+  const {extraFields, setExtraFields} = useContext(FormContext);
   const router = useRouter();
 
   const [selectedCheckboxes, setSelectedCheckboxes] = useState({
@@ -19,32 +20,68 @@ const BisDashboard = () => {
     nonexistenceBrand: false,
     factoryAuth: false,
     irSignAuth: false,
-    annexure1:false,
-    form6 : false,
+    annexure1: false,
+    form6: false,
   });
-  const [selectedAirNomination, setSelectedAirNomination] = useState(null);
 
+  
   const [selectedRadios, setSelectedRadios] = useState({
-    affidavit: "",
-    airNomination: "",
+    form3A : false,
+    form3B1 : false,
+    form3B2: false,
+    form3C : false,
+    form4A : false,
+    form4B : false,
+    form4C : false,
   });
-    
-  // Handle form submission
+
+
   const handleSubmit = () => {
     if (selectedForms.length > 0) {
-      router.push("/formbis"); 
+      router.push("/formbis");
     } else {
       alert("Please select a form before submitting.");
     }
-   
-    // Update selectedDocuments
+
     setSelectedDocuments({
       checkboxes: selectedCheckboxes,
       radios: selectedRadios,
+      factoryAuth : extraFields.factoryAuth,
+      irSignAuth: extraFields.irSignAuth,
     });
-  };  
-  
 
+    setFormsData((prev) => [
+      ...prev,
+      {
+        factoryAuth: extraFields.factoryAuth,
+        irSignAuth: extraFields.irSignAuth,
+      },
+    ]);
+
+    
+    
+  };
+
+  // const handleSubmit = () => {
+  //   console.log("Selected Checkboxes:", selectedCheckboxes);
+  //   console.log("Selected Radios:", selectedRadios);
+  
+  //   const hasSelectedCheckbox = Object.values(selectedCheckboxes).some((isChecked) => isChecked);
+  //   const hasSelectedRadio = Object.values(selectedRadios).some((isChecked) => isChecked);
+  
+  //   if (hasSelectedCheckbox || hasSelectedRadio) {
+  //     router.push("/formbis");
+     
+  //   } else {
+  //     alert("Please select a form before submitting.");
+  //   }
+  //   setSelectedDocuments({
+  //     checkboxes: selectedCheckboxes,
+  //     radios: selectedRadios,
+  //   });
+  // };
+  
+  
   const handleTreeClick = (targetIds) => {
 
     const newCheckboxes = {
@@ -54,103 +91,131 @@ const BisDashboard = () => {
       nonexistenceBrand: false,
       factoryAuth: false,
       irSignAuth: false,
-      annexure1:false,
-      form6 : false,
+      annexure1: false,
+      form6: false,
     };
-    
-    const newRadios = { ...selectedRadios }; 
-  
+
+    const newRadios = {
+      form3A : false,
+      form3B1 : false,
+      form3B2: false,
+      form3C : false,
+      form4A : false,
+      form4B : false,
+      form4C : false,
+
+    } 
+
     targetIds.forEach((id) => {
       if (newCheckboxes.hasOwnProperty(id)) {
-        newCheckboxes[id] = true; 
-      } else {
-
-        if (id.startsWith("form3")) {
-          newRadios.affidavit = id; 
-        } else if (id.startsWith("form4")) {
-          newRadios.airNomination = id; 
-        }
+        newCheckboxes[id] = true;
+      } else if (newRadios.hasOwnProperty(id)){
+        newRadios[id] = true;
       }
     });
-    
-    
-    setSelectedCheckboxes(newCheckboxes); 
-    setSelectedRadios(newRadios); //
-    updateSelectedForms(newCheckboxes, newRadios); 
+
+    setSelectedCheckboxes(newCheckboxes);
+    setSelectedRadios(newRadios); 
+    updateSelectedForms(newCheckboxes, newRadios);
   };
-  
 
   const updateSelectedForms = (checkboxes, radios) => {
     const newForms = [];
 
     switch (true) {
-      case radios.affidavit === "form3C" && checkboxes.brandAuth :
+      case radios.affidavit === "form3C" && checkboxes.brandAuth:
         newForms.push("2");
         break;
-          
+
       case checkboxes.unregTmr && radios.affidavit === "form3A":
         newForms.push("4");
         break;
 
-      case checkboxes.unregTmr && radios.airNomination === "form4C" :
+      case checkboxes.unregTmr && radios.airNomination === "form4C":
         newForms.push("4");
-          break;
-         
+        break;
+
       case checkboxes.brandAuth && radios.airNomination === "form4A":
         newForms.push("4");
-        break;   
+        break;
 
       case radios.affidavit === "form3B1":
         newForms.push("4");
         break;
-        
-      case checkboxes.nonexistenceBrand :
+
+      case checkboxes.nonexistenceBrand:
         newForms.push("4");
-        break; 
-      
-      case radios.airNomination === "form4A" || radios.affidavit ==="form3B2":
-       newForms.push("3");
-       break;
-      
-       case checkboxes.unregTmr:
-        newForms.push("2")
+        break;
+
+      case radios.airNomination === "form4A" || radios.affidavit === "form3B2":
+        newForms.push("3");
         break;
       
+      case checkboxes.unregTmr:
+        newForms.push("2")
+        break;
+
       case checkboxes.form2:
         newForms.push("1");
         break;
 
       default:
         break;
-      
+
     }
-    
+
     setSelectedForms(newForms);
   };
-  // Update checkbox state
+
   const handleCheckboxChange = (event) => {
     const { id, checked } = event.target;
-    setSelectedCheckboxes((prev) => ({ ...prev, [id]: checked }));
-    console.log(selectedCheckboxes);
-  };
+    setSelectedCheckboxes((prev) => {
+      if (checked) {
+        return { ...prev, [id]: true }; 
+      } else {
+        const updated = { ...prev };
+        delete updated[id]; 
+        return updated;
+      }
+    });
+      };
+      
 
-
-
-  // Update radio button state
+ //Affidavid
   const handleRadioChange = (event) => {
-    const { id } = event.target;
-    setSelectedRadios((prev) => ({ ...prev, affidavit: id, }));
-    console.log(selectedRadios);
+    const { id ,checked} = event.target;
+
+    setSelectedRadios((prev) => {
+      const updatedRadios = { ...prev };
+      updatedRadios.form3A = false;
+      updatedRadios.form3B1 = false;
+      updatedRadios.form3B2 = false;
+      updatedRadios.form3C = false;
+      updatedRadios[id] = true;
+      return updatedRadios;
+    });
+
   };
 
-  const handleRadioChangeAir = (event)=>{
-    const {id} = event.target;
-    setSelectedRadios((prev)=>({...prev,airNomination:id,}));
-  }
+
+
+  const handleRadioChangeAir = (event) => {
+    const { id,checked } = event.target;
+    setSelectedRadios((prev) => {
+      const updatedRadios = { ...prev };
+      updatedRadios.form4A = false;
+      updatedRadios.form4B = false;
+      updatedRadios.form4C = false;
+      updatedRadios[id] = true; 
+      return updatedRadios;
+    });
+  
+
+  };
+
 
   return (
     <>
-
       <div className="flex flex-col items-center min-h-screen py-10 bg-gray-100 ">
         <h1 className="mt-0 mb-4 text-4xl font-bold">BIS Docs</h1>
 
@@ -218,9 +283,15 @@ const BisDashboard = () => {
                     type="checkbox"
                     className="mr-2"
                     id="factoryAuth"
-                    checked={selectedCheckboxes.factoryAuth}
-                    onChange={handleCheckboxChange}
+                    checked={extraFields.factoryAuth}
+                    onChange={(e) =>
+                      setExtraFields({
+                        ...extraFields,
+                        factoryAuth : e.target.checked,
+                      })
+                    }
                   />
+
                   Factory Signatory Authorization
                 </label>
                 <label className="flex items-center">
@@ -228,9 +299,14 @@ const BisDashboard = () => {
                     type="checkbox"
                     className="mr-2"
                     id="irSignAuth"
-                    checked={selectedCheckboxes.irSignAuth}
-                    onChange={handleCheckboxChange}
-                  />
+                    checked={extraFields.irSignAuth}
+                    onChange={(e) =>
+                      setExtraFields({
+                        ...extraFields,
+                        irSignAuth : e.target.checked,
+                      })
+                    }          
+                     />
                   IR Signatory Authorization
                 </label>
               </div>
@@ -249,7 +325,7 @@ const BisDashboard = () => {
                   name="affidavit"
                   className="mr-2"
                   id="form3A"
-                  checked={selectedRadios.affidavit === "form3A"}
+                  checked={selectedRadios.form3A}
                   onChange={handleRadioChange}
                 />
                 Form-III A - Manufacturer&apos;s Branch Office/Liaison Office located
@@ -261,7 +337,7 @@ const BisDashboard = () => {
                   name="affidavit"
                   className="mr-2"
                   id="form3B1"
-                  checked={selectedRadios.affidavit === "form3B1"}
+                  checked={selectedRadios.form3B1}
                   onChange={handleRadioChange}
                 />
                 Form-III B - Brand Owner/Proprietor/Registered User/subsidiary
@@ -273,7 +349,7 @@ const BisDashboard = () => {
                   name="affidavit"
                   className="mr-2"
                   id="form3B2"
-                  checked={selectedRadios.affidavit === "form3B2"}
+                  checked={selectedRadios.form3B2}
                   onChange={handleRadioChange}
                 />
                 Form-III B - Major importer/distributor/entity having marketing
@@ -285,14 +361,14 @@ const BisDashboard = () => {
                   name="affidavit"
                   className="mr-2"
                   id="form3C"
-                  checked={selectedRadios.affidavit === "form3C"}
+                  checked={selectedRadios.form3C}
                   onChange={handleRadioChange}
                 />
                 Form-III C - Manufacturer located in India
               </label>
             </div>
           </div>
-    
+
           {/* Right  */}
           <div className="w-1/3 p-6 bg-white rounded-lg shadow-md">
             <h2 className="mb-2 text-xl font-semibold">AIR Nomination</h2>
@@ -303,10 +379,10 @@ const BisDashboard = () => {
                   name="airNomination"
                   className="mr-2"
                   id="form4A"
-                  checked={selectedRadios.airNomination === "form4A"}
+                  checked={selectedRadios.form4A}
                   onChange={handleRadioChangeAir}
 
-                  
+
                 />
                 Form-IV Nomination - Factory liaison office/subsidiary
                 firm/branch office
@@ -317,7 +393,7 @@ const BisDashboard = () => {
                   name="airNomination"
                   className="mr-2"
                   id="form4B"
-                  checked={selectedRadios.airNomination === "form4B"}
+                  checked={selectedRadios.form4B}
                   onChange={handleRadioChangeAir}
 
                 />
@@ -329,7 +405,7 @@ const BisDashboard = () => {
                   name="airNomination"
                   className="mr-2"
                   id="form4C"
-                  checked={selectedRadios.airNomination === "form4C"}
+                  checked={selectedRadios.form4C}
                   onChange={handleRadioChangeAir}
 
                 />
@@ -357,13 +433,13 @@ const BisDashboard = () => {
               Report
             </span>
           </label>
-        
+
           <label className="flex items-center space-x-2">
             <input
               type="checkbox"
               className="w-5 h-5 border rounded"
               id="annexure1"
-          
+
               checked={selectedCheckboxes.annexure1}
               onChange={handleCheckboxChange}
             />
@@ -375,12 +451,12 @@ const BisDashboard = () => {
 
         <button
           onClick={handleSubmit}
-          
+
           className="w-5/6 px-4 py-2 mb-8 text-center text-white bg-blue-500 rounded-md hover:bg-blue-600"
         >
           Submit
         </button>
-         
+
         <div className="text-center">
           <p className="text-gray-500">Scroll down for BIS docs tree chart</p>
           <p className="text-gray-500">
@@ -408,4 +484,3 @@ const BisDashboard = () => {
 export default BisDashboard;
 
 
-  

@@ -45,7 +45,7 @@ export default function Click7() {
       [name]: value
     }));
   };
-  
+   
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);

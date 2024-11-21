@@ -6,7 +6,7 @@ import { generateForm2Document} from "./forms-docx-sample/formTwo2";
 import { generateForm3CDocument, generateForm3Document } from "./forms-docx-sample/form3C";
 import {generateunRegTmDocument} from "./forms-docx-sample/unRegTm";
 import { generatebrandAuthdocument } from "./forms-docx-sample/brandAuth";
-import {generateFormIVFactoryDocument} from "./forms-docx-sample/form4Factory";
+import {generateForm4FactoryDocument} from "./forms-docx-sample/form4Factory";
 import { generateForm3B2Document } from "./forms-docx-sample/form3B2";
 import {generateForm3B1Document} from "./forms-docx-sample/form3B1"
 import {generateForm3ADocument} from "./forms-docx-sample/form3A";
@@ -15,44 +15,123 @@ import { generateForm4ThirdPartyDocument } from "./forms-docx-sample/form4ThirdP
 import  {generateNonexistenceDocument} from "./forms-docx-sample/Nonexistence";
 import { generateDocxFile } from "./forms-docx-sample/formTwo";
 
+import JSZip from "jszip";
+import { saveAs } from "file-saver";
+
+
 const DownloadPage = () => {
   const { selectedDocuments,formsData} = useContext(FormContext);
   const { checkboxes, radios } = selectedDocuments;
-   
-
-  const getLetterhead = (docType) => {
-    switch (docType) {
-      case 'form2':
-        return 'IR Firm by me';
-      case 'brandAuth':
-        return 'Brand Authorization Firm';
-      case 'unregTmr':
-        return 'Unregistered Trademark';
-      case 'affidavit':
-        return 'Affidavit Document';
-
-        case "airNomination":
-        return "No problem";
-      default:
-        return 'N/A';
-    }
-  };
-
+  const {extraFields, setExtraFields} = useContext(FormContext);
 
   
+  const getLetterhead = (docType) => {
+    if(["form2"].includes(docType)){
+      return "IR Firm";
+    }else if (["brandAuth","unregTmr","nonexistenceBrand"].includes(docType)){
+      return formsData.brandOwnerFirmName ;
+    } else if(["form3A","form3B1","form3B2","form3C"].includes(docType)){
+      return "NA";
+    } else if(["form4A","form4B","form4C"].includes(docType)){
+      return formsData.manufacturerName;
+    } else if(["factoryAuth","form6","annexure1"].includes(docType)){
+      return formsData.manufacturerName;
+    } else if(["irSignAuth"].includes(docType)){
+      return formsData.irFirmName;
+    }
+    
+    else{
+      return "";
+    }
+   
+  };
 
+  /////
+  
+  const handleDownloadZip = async () => {
+    const zip = new JSZip();
+    const folder = zip.folder("Selected_Documents");
+   
+    // Iterate over selected documents
+    for (const doc of combinedDocuments) {
+      const { name } = doc;
+      
+      let docBlob;
+      switch (name) {
+        case 'form2':
+          docBlob = await generateForm2Document(formsData, combinedDocuments);
+        
+          break;
+        case 'brandAuth':
+          docBlob = await generatebrandAuthdocument(formsData, combinedDocuments);
+          break;
+        case 'unregTmr':
+          docBlob = await generateunRegTmDocument(formsData, combinedDocuments);
+          break;
+
+        case 'nonexistenceBrand':
+          docBlob = await generateNonexistenceDocument(formsData,combinedDocuments);
+          break;
+          
+        case 'form3A':
+          docBlob = await generateForm3ADocument(formsData, combinedDocuments);
+          break;
+
+        case 'form3B1':
+          docBlob = await generateForm3B1Document(formsData,combinedDocuments);
+          break;
+        
+        case 'form3B2':
+          docBlob  = await generateForm3B2Document(formsData,combinedDocuments);
+          break;
+        
+        case 'form3C':
+          docBlob = await generateForm3CDocument(formsData,combinedDocuments);
+
+
+        case 'form4A':
+          docBlob = await generateForm4FactoryDocument(formsData,combinedDocuments);
+          break;
+
+        case 'form4B':
+          docBlob = await generateForm4BrandDocument(formsData,combinedDocuments);
+          break;
+
+        case 'form4C':
+          docBlob = await generateForm4ThirdPartyDocument(formsData,combinedDocuments);
+          break;
+
+        default:
+          continue; // Skip unsupported document types
+      }
+      
+      // Add the document to the ZIP folder
+      if (docBlob) {
+        folder.file(`${name}.docx`, docBlob);
+      }
+    }
+  
+    
+    const zipBlob = await zip.generateAsync({ type: "blob" });
+  
+    
+    saveAs(zipBlob, "Selected_Documents.zip");
+  };  
+
+                
+  /////
   const combinedDocuments = [
     ...Object.entries(checkboxes)
     .filter(([key, value]) => value)
-    .map(([key]) => ({ type: 'checkbox', name: key,letterhead : getLetterhead(key), signStamp : "Balbir Singh Bora" })),
+    .map(([key]) => ({ type: 'checkbox', name: key,letterhead : getLetterhead(key), signStamp : formsData.irSignatoryName  })),
 
     ...Object.entries(radios)
     .filter(([key, value]) => value)
-    .map(([key]) => ({ type: 'radio', name: key,letterhead: getLetterhead(key), signStamp :"Balbir " })),
+    .map(([key]) => ({ type: 'radio', name: key,letterhead: getLetterhead(key), signStamp :formsData.irSignatoryName  })),[]
+
   ];
-  
-  
-  
+
+
   const downloadForm =(formName) =>{
     console.log("Selected form: ",formName);
     switch (formName) {
@@ -72,26 +151,35 @@ const DownloadPage = () => {
         generateNonexistenceDocument(formsData,combinedDocuments)
         break;
 
-       case "airNomination":
-        generateFormIVFactoryDocument(formsData,combinedDocuments)
-        console.log("hey hey 4a")
-        break; 
-
-        case "affidavit" :
+        case "form3A":
           generateForm3ADocument(formsData,combinedDocuments)
-          console.log("happ coding")
           break;
-          
+
+        case "form3B1":
+          generateForm3B1Document(formsData,combinedDocuments)
+          break;
+        case "form3B2":
+          generateForm3B2Document(formsData,combinedDocuments)
+          break;
+        case "form3C":
+          generateForm3CDocument(formsData,combinedDocuments)
+          break;
+
+         case "form4A":
+          generateForm4FactoryDocument(formsData,combinedDocuments)
+          break; 
+
+        case "form4B":
+          generateForm4BrandDocument(formsData,combinedDocuments)
+           break;  
+
+          case "form4C":
+          generateForm4ThirdPartyDocument(formsData,combinedDocuments)
+          break; 
+
       default:
         break;
     }
-  }
-  
-
-
-  
-  const generateDoxcform = ()=>{
-    generateNonexistenceDocument(formsData);
   }
   
   return (
@@ -101,7 +189,7 @@ const DownloadPage = () => {
         <div className="flex items-center mb-4">
           <GoToHome/>
         </div>
-        <button className="bg-blue-600 text-white py-2 px-4 rounded-md mb-4 flex items-center" onClick={generateDoxcform}>
+        <button onClick={handleDownloadZip} className="bg-blue-600 text-white py-2 px-4 rounded-md mb-4 flex items-center">
           Click to download!
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -154,11 +242,11 @@ const DownloadPage = () => {
           <tbody>
 
             {combinedDocuments.map((doc, index,letterhead) => (
-              <tr key={index} className="border-t">
+              <tr key={index} className="border-t"   
+              >
                 <td className="border border-gray-300 p-2">{index + 1}</td>
                 <td className="border border-gray-300 p-2">{doc.name}</td>
-                {/* <td className="border border-gray-300 p-2">{doc.letterhead}</td> */}
-                <td className="border border-gray-300 p-2">{doc.letterhead || "N/A"}</td> 
+                <td className="border border-gray-300 p-2">{doc.letterhead }</td> 
 
                 <td className="border border-gray-300 p-2">{formsData.irSignatoryName || "N/A"}</td>
                 </tr>

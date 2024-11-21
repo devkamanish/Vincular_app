@@ -21,15 +21,17 @@ const FormPage = () => {
           {formId === "2" && <Click2/>}
           {formId === "3" && <Click4/>}
           {formId === "4" && <Click7/>}
+          {formId ===4}
           {/* Add other forms as needed */}
-
-        </div>
-      ))}
+          
+        </div>  
+      ))} 
     </div>
   );
 };
 
   
+
 
 export default FormPage;
 

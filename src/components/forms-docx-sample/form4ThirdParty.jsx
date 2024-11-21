@@ -179,6 +179,7 @@ import {
   
       const blob = await Packer.toBlob(doc);
       saveAs(blob, `Form_IV_thirdParty_${new Date().toISOString().split("T")[0]}.docx`);
+      return blob;
     } catch (error) {
       console.error("Error generating DOCX file:", error);
     }

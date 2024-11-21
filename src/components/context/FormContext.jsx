@@ -11,8 +11,13 @@ const FormProvider = ({ children }) => {
     radios: {},
     formsData :{},
   });
+
+  const [extraFields, setExtraFields] = useState({
+    factoryAuth	: false,
+    irSignAuth: false,
+  });
   
-  const [formsData, setFormsData] = useState({});
+  const [formsData, setFormsData] = useState([]);
   
 
   const updateSelectedForms = (form) => {
@@ -28,7 +33,7 @@ const FormProvider = ({ children }) => {
   
 
   return (
-    <FormContext.Provider value={{ selectedForms, setSelectedForms,selectedDocuments,setSelectedDocuments,formsData, setFormsData }}>
+    <FormContext.Provider value={{ selectedForms, setSelectedForms,selectedDocuments,setSelectedDocuments,formsData, setFormsData ,extraFields, setExtraFields}}>
       {children}
     </FormContext.Provider>
   );

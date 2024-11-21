@@ -6,6 +6,7 @@ import { FormContext } from "../context/FormContext";
 
 
 export default function Click1() {
+   const { extraFields } = useContext(FormContext); 
   const [formData, setFormData] = useState({
     manufacturerName: "",
     manufacturerAddress: "",
@@ -19,8 +20,25 @@ export default function Click1() {
     labName: "",
     reportNo: "",
     reportDate: "",
-    irSignatoryName: ""
+    irSignatoryName: "",
+    irSignatoryDesignation: "",
+    irSignatoryHeadName: "",
+    irHeadSignatoryDesignation: "",
+    irFirmName: "",
+    irFirmAddress: "",
   });
+
+
+  
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+  
+
 
   const { formsData,setFormsData } = useContext(FormContext);
 
@@ -208,6 +226,35 @@ export default function Click1() {
             className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </div>
+
+        {/* //// */}
+
+         
+         {extraFields.irSignAuth && (
+        <div>
+          
+          <div>
+            <label>IR Signatory Designation</label>
+            <input name ="irSignatoryDesignation" value={formData.irSignatoryDesignation} onChange = {handleInputChange}  type="text" placeholder="Enter Designation" />
+          </div>
+          <div>
+            <label>IR Signatory Head Name</label>
+            <input name = "irSignatoryHeadName" value={formData.irSignatoryHeadName} onChange={handleInputChange} type="text" placeholder="Enter Name" />
+          </div>
+          <div>
+            <label>IR Head Signatory Designation</label>
+            <input type="text" name = "irHeadSignatoryDesignation" value={formData.irHeadSignatoryDesignation} onChange={handleInputChange} placeholder="Enter Designation" />
+          </div>
+          <div>
+            <label>IR Firm Name</label>
+            <input type="text" name = "irFirmName" value={formData.irFirmName} onChange={handleInputChange} placeholder="Enter IR Firm Name" />
+          </div>
+          <div>
+            <label>IR Firm Address</label>
+            <input type="text" name = "irFirmAddress" value = {formData.irFirmAddress} onChange={handleInputChange}/>
+          </div>
+        </div>
+      )}
 
         {/* Submit Button */}
         <button

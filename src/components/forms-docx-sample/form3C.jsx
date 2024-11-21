@@ -230,8 +230,11 @@
   
       const blob = await Packer.toBlob(doc);
       saveAs(blob, `Form-III_C_${new Date().toISOString().split('T')[0]}.docx`);
+      return blob;
     } catch (error) {
       console.error("Error generating DOCX file:", error);
     }
   };
+  
+
   
