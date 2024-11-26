@@ -12,6 +12,8 @@ export default function Click1() {
     manufacturerAddress: "",
     manufacturerSignatoryName: "",
     manufacturerSignatoryDesignation: "",
+    manufacturerHeadSig:"",
+    manufacturerHeadSigDesignation :"",
     manufacturerSignatoryAge: "",
     brand: "",
     productName: "",
@@ -253,8 +255,21 @@ export default function Click1() {
             <label>IR Firm Address</label>
             <input type="text" name = "irFirmAddress" value = {formData.irFirmAddress} onChange={handleInputChange}/>
           </div>
+
+          <div>
+            <label >Manufacturer Head Signatory</label>
+            <input type="text" name = "manufacturerHeadSig" value={formData.manufacturerHeadSig} onChange={handleInputChange}/>
+          </div>
+
+          <div>
+            <label >Manufacturer Head Signatory Designation</label>
+            <input type="text" name="manufacturerHeadSigDesignation"  value={formsData.manufacturerHeadSigDesignation} onChange={handleInputChange}/>
+          </div>
         </div>
       )}
+
+     
+    
 
         {/* Submit Button */}
         <button

@@ -46,21 +46,21 @@ const DownloadPage = () => {
     }
   };
 
-  /////
+  
+
 
   const handleDownloadZip = async () => {
     const zip = new JSZip();
     const folder = zip.folder("Selected_Documents");
 
-    // Iterate over selected documents
+    
     for (const doc of combinedDocuments) {
       const { name } = doc;
 
-      let docBlob;
+      let docBlob = null;
       switch (name) {
         case "form2":
           docBlob = await generateForm2Document(formsData, combinedDocuments);
-
           break;
         case "brandAuth":
           docBlob = await generatebrandAuthdocument(
@@ -93,6 +93,7 @@ const DownloadPage = () => {
 
         case "form3C":
           docBlob = await generateForm3CDocument(formsData, combinedDocuments);
+          break;
 
         case "form4A":
           docBlob = await generateForm4FactoryDocument(
@@ -116,12 +117,12 @@ const DownloadPage = () => {
           break;
 
         default:
-          continue; // Skip unsupported document types
+          continue; 
       }
 
-      // Add the document to the ZIP folder
+      
       if (docBlob) {
-        folder.file(`${name}.docx, docBlob`);
+        folder.file(`${name}.docx`, docBlob);
       }
     }
 
@@ -130,7 +131,7 @@ const DownloadPage = () => {
     saveAs(zipBlob, "Selected_Documents.zip");
   };
 
-  /////
+  
   const combinedDocuments = [
     ...Object.entries(checkboxes)
       .filter(([key, value]) => value)
@@ -148,7 +149,6 @@ const DownloadPage = () => {
         letterhead: getLetterhead(key),
         signStamp: formsData.irSignatoryName,
       })),
-    // Add factoryAuth if it exists and has a value
     ...(factoryAuth
       ? [
           {
@@ -159,8 +159,8 @@ const DownloadPage = () => {
           },
         ]
       : []),
-    // Add irSignAuth if it exists and has a value
-    ...(irSignAuth
+
+      ...(irSignAuth
       ? [
           {
             type: "auth",
@@ -172,6 +172,7 @@ const DownloadPage = () => {
       : []),
   ];
 
+  
   console.log("uuuuu", combinedDocuments);
   console.log("qwertyu", selectedDocuments);
   console.log("fghjk", factoryAuth, irSignAuth);

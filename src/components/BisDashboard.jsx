@@ -51,7 +51,9 @@ const BisDashboard = () => {
     });
 
     setFormsData((prev) => [
-      ...prev,
+      ...(Array.isArray(prev) ? prev : []), // Ensure prev is iterable
+
+    
       {
         factoryAuth: extraFields.factoryAuth,
         irSignAuth: extraFields.irSignAuth,
