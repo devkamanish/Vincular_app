@@ -7,29 +7,43 @@ import { FormContext } from "../context/FormContext";
 
 
 export default function Click2() {
+  const { extraFields } = useContext(FormContext); 
+
   const router = useRouter();
   const [formData, setFormData] = useState({
     manufacturerName: "",
     manufacturerAddress: "",
     manufacturerSignatoryName: "",
     manufacturerSignatoryDesignation: "",
+
+ 
+
     manufacturerSignatoryAge: "",
     brand: "",
-
     brandOwnerSigName: "",
     brandOwnerSigDesignation :"",
     brandOwnerFirmName :"",
     brandOwnerFirmAddress :"",
-    
     productName: "",
     modelNo: "",
     isStandard: "",
     labName: "",
     reportNo: "",
     reportDate: "",
-    irSignatoryName: ""
+    irSignatoryName: "",
+     
+    irSignatoryDesignation:"",
+    irFirmName:"",
+    irFirmAddress:"",
+    irFirmPhoneNo:"",
+    irFirmEmail:"",
+    
+    irSignatoryHeadName: "",
+    irHeadSignatoryDesignation: "",
+    manufacturerHeadSig:"",
+    manufacturerHeadSigDesignation :"",
   });
-  
+
   const { formsData,setFormsData } = useContext(FormContext);
 
   const handleChange = (e) => {
@@ -40,6 +54,16 @@ export default function Click2() {
     }));
   };
 
+  
+  
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
@@ -256,6 +280,54 @@ export default function Click2() {
             className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </div>
+        
+        {extraFields.irSignAuth && (
+        <div>
+          
+          <div className="mb-4">
+            <label className="block mb-2 font-semibold text-gray-700">IR Signatory Designation</label>
+            <input
+             name ="irSignatoryDesignation" 
+             value={formData.irSignatoryDesignation}
+              onChange = {handleInputChange}  type="text"  className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
+          </div>
+          <div className="mb-4">
+            <label className="block mb-2 font-semibold text-gray-700">IR Signatory Head Name</label>
+            <input name = "irSignatoryHeadName" value={formData.irSignatoryHeadName} onChange={handleInputChange} type="text"  className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"  />
+          </div>
+
+          <div className="mb-4">
+            <label className="block mb-2 font-semibold text-gray-700">IR Head Signatory Designation</label>
+            <input type="text" name = "irHeadSignatoryDesignation" value={formData.irHeadSignatoryDesignation} onChange={handleInputChange} className= "w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"  />
+          </div>
+          <div className="mb-4">
+            <label className="block mb-2 font-semibold text-gray-700">IR Firm Name</label>
+            <input type="text" name = "irFirmName" value={formData.irFirmName} onChange={handleInputChange}  className= "w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
+          </div>
+          <div className="mb-4">
+            <label className="block mb-2 font-semibold text-gray-700">IR Firm Address</label>
+            <input type="text" name = "irFirmAddress" value = {formData.irFirmAddress} onChange={handleInputChange} className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
+          </div>
+
+         
+        </div>
+      )}
+  
+      {extraFields.factoryAuth &&(
+        <div>
+           <div className="mb-4">
+            <label className="block mb-2 font-semibold text-gray-700">Manufacturer Head Signatory</label>
+            <input type="text" name = "manufacturerHeadSig" value={formData.manufacturerHeadSig} onChange={handleInputChange}
+            className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+          </div>
+
+          <div className="mb-4">
+            <label className="block mb-2 font-semibold text-gray-700" >Manufacturer Head Signatory Designation</label>
+            <input type="text" name="manufacturerHeadSigDesignation"  value={formData.manufacturerHeadSigDesignation} onChange={handleInputChange} className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+          </div>
+        </div>
+      )}
+
 
         {/* Submit Button */}
         <button

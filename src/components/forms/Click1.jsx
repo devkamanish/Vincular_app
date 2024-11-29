@@ -1,5 +1,5 @@
 "use client"
-import { useState ,useContext} from "react";
+import { useState ,useContext, startTransition} from "react";
 import GoToHome from "../GoToHome";
 import { useRouter } from "next/navigation";
 import { FormContext } from "../context/FormContext";
@@ -28,10 +28,18 @@ export default function Click1() {
     irHeadSignatoryDesignation: "",
     irFirmName: "",
     irFirmAddress: "",
+    irFirmPhoneNo:"",
+    irFirmEmail :"",
+
+    registrationNoR:"",
+    applyingPeriod:"",
+    quantityMarkWithStandardMark:"",
+    startDate:"",
+    endDate:""
+
   });
 
-
-  
+ 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -40,8 +48,6 @@ export default function Click1() {
     }));
   };
   
-
-
   const { formsData,setFormsData } = useContext(FormContext);
 
   const handleChange = (e) => {
@@ -51,6 +57,7 @@ export default function Click1() {
       [name]: value
     }));
   };
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -96,7 +103,7 @@ export default function Click1() {
             className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </div>
-
+         
         {/* Manufacturer Signatory Name */}
         <div className="mb-4">
           <label className="block mb-2 font-semibold text-gray-700">Manufacturer Signatory Name</label>
@@ -120,6 +127,7 @@ export default function Click1() {
             className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </div>
+
 
         {/* Manufacturer Signatory Age */}
         <div className="mb-4">
@@ -205,6 +213,8 @@ export default function Click1() {
           />
         </div>
 
+    
+
         {/* Report Date */}
         <div className="mb-4">
           <label className="block mb-2 font-semibold text-gray-700">Report Date</label>
@@ -228,49 +238,117 @@ export default function Click1() {
             className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </div>
-
-        {/* //// */}
-
-         
-         {extraFields.irSignAuth && (
+           
+        {extraFields.irSignAuth && (
         <div>
           
-          <div>
-            <label>IR Signatory Designation</label>
-            <input name ="irSignatoryDesignation" value={formData.irSignatoryDesignation} onChange = {handleInputChange}  type="text" placeholder="Enter Designation" />
+          <div className="mb-4">
+            <label className="block mb-2 font-semibold text-gray-700">IR Signatory Designation</label>
+            <input
+             name ="irSignatoryDesignation" 
+             value={formData.irSignatoryDesignation}
+              onChange = {handleInputChange}  type="text"  className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
           </div>
-          <div>
-            <label>IR Signatory Head Name</label>
-            <input name = "irSignatoryHeadName" value={formData.irSignatoryHeadName} onChange={handleInputChange} type="text" placeholder="Enter Name" />
-          </div>
-          <div>
-            <label>IR Head Signatory Designation</label>
-            <input type="text" name = "irHeadSignatoryDesignation" value={formData.irHeadSignatoryDesignation} onChange={handleInputChange} placeholder="Enter Designation" />
-          </div>
-          <div>
-            <label>IR Firm Name</label>
-            <input type="text" name = "irFirmName" value={formData.irFirmName} onChange={handleInputChange} placeholder="Enter IR Firm Name" />
-          </div>
-          <div>
-            <label>IR Firm Address</label>
-            <input type="text" name = "irFirmAddress" value = {formData.irFirmAddress} onChange={handleInputChange}/>
+          <div className="mb-4">
+            <label className="block mb-2 font-semibold text-gray-700">IR Signatory Head Name</label>
+            <input name = "irSignatoryHeadName" value={formData.irSignatoryHeadName} onChange={handleInputChange} type="text"  className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"  />
           </div>
 
-          <div>
-            <label >Manufacturer Head Signatory</label>
-            <input type="text" name = "manufacturerHeadSig" value={formData.manufacturerHeadSig} onChange={handleInputChange}/>
+          <div className="mb-4">
+            <label className="block mb-2 font-semibold text-gray-700">IR Head Signatory Designation</label>
+            <input type="text" name = "irHeadSignatoryDesignation" value={formData.irHeadSignatoryDesignation} onChange={handleInputChange} className= "w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"  />
+          </div>
+          <div className="mb-4">
+            <label className="block mb-2 font-semibold text-gray-700">IR Firm Name</label>
+            <input type="text" name = "irFirmName" value={formData.irFirmName} onChange={handleInputChange}  className= "w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
+          </div>
+          <div className="mb-4">
+            <label className="block mb-2 font-semibold text-gray-700">IR Firm Address</label>
+            <input type="text" name = "irFirmAddress" value = {formData.irFirmAddress} onChange={handleInputChange} className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
+          </div>
+         
+        </div>
+      )}
+  
+      {extraFields.factoryAuth &&(
+        <div>
+           <div className="mb-4">
+            <label className="block mb-2 font-semibold text-gray-700">Manufacturer Head Signatory</label>
+            <input type="text" name = "manufacturerHeadSig" value={formData.manufacturerHeadSig} onChange={handleInputChange}
+            className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"/>
           </div>
 
-          <div>
-            <label >Manufacturer Head Signatory Designation</label>
-            <input type="text" name="manufacturerHeadSigDesignation"  value={formsData.manufacturerHeadSigDesignation} onChange={handleInputChange}/>
+          <div className="mb-4">
+            <label className="block mb-2 font-semibold text-gray-700" >Manufacturer Head Signatory Designation</label>
+            <input type="text" name="manufacturerHeadSigDesignation"  value={formData.manufacturerHeadSigDesignation} onChange={handleInputChange} className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"/>
           </div>
         </div>
       )}
+  
 
-     
-    
+      {extraFields.form6 &&(
+        <div>
+         
+         <div className="mb-4">
+            <label className="block mb-2 font-semibold text-gray-700" >Registration No. R-</label>
+            <input type="number" name="registrationNoR"  value={formData.registrationNoR} onChange={handleInputChange} className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+          </div>
+          
+          <div className="mb-4">
+            <label className="block mb-2 font-semibold text-gray-700" >Applying for period(in years)</label>
+            <input type="number" name="applyingPeriod"  value={formData.applyingPeriod} onChange={handleInputChange} className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+          </div>
 
+          
+          <div className="mb-4">
+            <label className="block mb-2 font-semibold text-gray-700" >Quantity marked with Standard Mark</label>
+            <input type="text" name="quantityMarkWithStandardMark"  value={formData.quantityMarkWithStandardMark} onChange={handleInputChange} className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+          </div>
+
+          <div className="mb-4">
+            <label className="block mb-2 font-semibold text-gray-700" >Start Date</label>
+            <input type="Date" name="startDate"  value={formData.startDate} onChange={handleInputChange} className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+          </div>
+
+          <div className="mb-4">
+            <label className="block mb-2 font-semibold text-gray-700" >End Date</label>
+            <input type="date" name="endDate"  value={formData.endDate} onChange={handleInputChange} className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+          </div>
+        </div>
+      )}
+        
+      {extraFields.annexure1 &&(
+        <div>
+            <div className="mb-4">
+            <label className="block mb-2 font-semibold text-gray-700">IR Signatory Designation</label>
+            <input
+             name ="irSignatoryDesignation" 
+             value={formData.irSignatoryDesignation}
+              onChange = {handleInputChange}  type="text"  className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
+            </div>
+
+            <div className="mb-4">
+            <label className="block mb-2 font-semibold text-gray-700">IR Firm Name</label>
+            <input type="text" name = "irFirmName" value={formData.irFirmName} onChange={handleInputChange}  className= "w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
+            </div>
+
+            <div className="mb-4">
+            <label className="block mb-2 font-semibold text-gray-700">IR Firm Address</label>
+            <input type="text" name = "irFirmAddress" value = {formData.irFirmAddress} onChange={handleInputChange} className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
+            </div>
+
+            <div className="mb-4">
+            <label className="block mb-2 font-semibold text-gray-700">IR Firm Phone No.</label>
+            <input type="tel" name = "irFirmPhoneNo" value = {formData.irFirmPhoneNo} onChange={handleInputChange} className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
+            </div>
+
+            <div className="mb-4">
+            <label className="block mb-2 font-semibold text-gray-700">IR Firm Email Id</label>
+            <input type="email" name = "irFirmEmail" value = {formData.irFirmEmail} onChange={handleInputChange} className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
+            </div>
+          
+        </div>
+      )}
         {/* Submit Button */}
         <button
           type="submit"

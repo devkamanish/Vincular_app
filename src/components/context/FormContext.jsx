@@ -15,9 +15,12 @@ const FormProvider = ({ children }) => {
   const [extraFields, setExtraFields] = useState({
     factoryAuth	: false,
     irSignAuth: false,
+    annexure1 :false,
+    form6 : false,
   });
-  
-  
+    
+
+
   const [formsData, setFormsData] = useState([]);
   
 
@@ -32,7 +35,6 @@ const FormProvider = ({ children }) => {
   };
  
   
-
   return (
     <FormContext.Provider value={{ selectedForms, setSelectedForms,selectedDocuments,setSelectedDocuments,formsData, setFormsData ,extraFields, setExtraFields}}>
       {children}
@@ -41,5 +43,6 @@ const FormProvider = ({ children }) => {
 };
 
 export { FormContext, FormProvider };
+
 
 

@@ -24,7 +24,7 @@ const BisDashboard = () => {
     form6: false,
   });
 
-  
+
   const [selectedRadios, setSelectedRadios] = useState({
     form3A : false,
     form3B1 : false,
@@ -46,22 +46,23 @@ const BisDashboard = () => {
     setSelectedDocuments({
       checkboxes: selectedCheckboxes,
       radios: selectedRadios,
-      factoryAuth : extraFields.factoryAuth,
-      irSignAuth: extraFields.irSignAuth,
+      // factoryAuth : extraFields.factoryAuth,
+      // irSignAuth: extraFields.irSignAuth,
+      annexure1:extraFields.annexure1,
+      form6: extraFields.form6,
     });
 
     setFormsData((prev) => [
       ...(Array.isArray(prev) ? prev : []), // Ensure prev is iterable
 
-    
       {
         factoryAuth: extraFields.factoryAuth,
         irSignAuth: extraFields.irSignAuth,
+        form6 : extraFields.form6,
+        annexure1 : extraFields.annexure1
       },
     ]);
 
-    
-    
   };
 
   // const handleSubmit = () => {
@@ -96,6 +97,7 @@ const BisDashboard = () => {
       annexure1: false,
       form6: false,
     };
+
 
     const newRadios = {
       form3A : false,
@@ -409,7 +411,6 @@ const BisDashboard = () => {
                   id="form4C"
                   checked={selectedRadios.form4C}
                   onChange={handleRadioChangeAir}
-
                 />
                 Form-IV Nomination - Major importer/distributor
               </label>
@@ -426,9 +427,14 @@ const BisDashboard = () => {
               type="checkbox"
               className="w-5 h-5 border rounded"
               id="form6"
-
-              checked={selectedCheckboxes.form6}
-              onChange={handleCheckboxChange}
+              name="form6"
+              checked={extraFields.form6}
+              onChange={(e) =>
+                setExtraFields({
+                  ...extraFields,
+                  form6 : e.target.checked,
+                })
+              }
             />
             <span className="text-gray-700">
               Form-VI-Application for Renewal of Licence & Production Plan
@@ -441,9 +447,14 @@ const BisDashboard = () => {
               type="checkbox"
               className="w-5 h-5 border rounded"
               id="annexure1"
-
-              checked={selectedCheckboxes.annexure1}
-              onChange={handleCheckboxChange}
+              name= "annexure1"
+              checked={extraFields.annexure1}
+              onChange={(e) =>
+                setExtraFields({
+                  ...extraFields,
+                  annexure1 : e.target.checked,
+                })
+              }
             />
             <span className="text-gray-700">Annexure-1-Distributors List</span>
           </label>
