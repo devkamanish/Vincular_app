@@ -17,7 +17,7 @@ export default function Click1() {
     manufacturerSignatoryAge: "",
     brand: "",
     productName: "",
-    modelNo: "",
+    modelNo: "",  
     isStandard: "",
     labName: "",
     reportNo: "",
@@ -327,6 +327,7 @@ export default function Click1() {
               onChange = {handleInputChange}  type="text"  className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
             </div>
 
+
             <div className="mb-4">
             <label className="block mb-2 font-semibold text-gray-700">IR Firm Name</label>
             <input type="text" name = "irFirmName" value={formData.irFirmName} onChange={handleInputChange}  className= "w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
@@ -346,7 +347,7 @@ export default function Click1() {
             <label className="block mb-2 font-semibold text-gray-700">IR Firm Email Id</label>
             <input type="email" name = "irFirmEmail" value = {formData.irFirmEmail} onChange={handleInputChange} className="w-full p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
             </div>
-          
+
         </div>
       )}
         {/* Submit Button */}

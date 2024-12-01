@@ -25,6 +25,8 @@ const BisDashboard = () => {
   });
 
 
+
+
   const [selectedRadios, setSelectedRadios] = useState({
     form3A : false,
     form3B1 : false,
@@ -46,14 +48,14 @@ const BisDashboard = () => {
     setSelectedDocuments({
       checkboxes: selectedCheckboxes,
       radios: selectedRadios,
-      // factoryAuth : extraFields.factoryAuth,
-      // irSignAuth: extraFields.irSignAuth,
+      factoryAuth : extraFields.factoryAuth,
+      irSignAuth: extraFields.irSignAuth,
       annexure1:extraFields.annexure1,
       form6: extraFields.form6,
     });
 
     setFormsData((prev) => [
-      ...(Array.isArray(prev) ? prev : []), // Ensure prev is iterable
+      ...(Array.isArray(prev) ? prev : []),
 
       {
         factoryAuth: extraFields.factoryAuth,

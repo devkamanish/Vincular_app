@@ -3,6 +3,7 @@
   import localFont from "next/font/local";
 import "./globals.css";
 import { FormProvider } from "../components/context/FormContext";
+import Head from "next/head";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -24,7 +25,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-    
+      <head>
+        <link rel="image" href="/favicon.png"/>
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

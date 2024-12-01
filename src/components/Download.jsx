@@ -5,7 +5,6 @@ import GoToHome from "./GoToHome";
 import { generateForm2Document } from "./forms-docx-sample/formTwo2";
 import {
   generateForm3CDocument,
-  generateForm3Document,
 } from "./forms-docx-sample/form3C";
 import { generateunRegTmDocument } from "./forms-docx-sample/unRegTm";
 import { generatebrandAuthdocument } from "./forms-docx-sample/brandAuth";
@@ -17,6 +16,9 @@ import { generateForm4BrandDocument } from "./forms-docx-sample/form4Brand";
 import { generateForm4ThirdPartyDocument } from "./forms-docx-sample/form4ThirdParty";
 import { generateNonexistenceDocument } from "./forms-docx-sample/Nonexistence";
 import { generateDocxFile } from "./forms-docx-sample/formTwo";
+import { generateAnnexure1Document } from "./forms-docx-sample/annexure1";
+import { generateForm6Document } from "./forms-docx-sample/form6";
+import { generateFactoryAuthDocument } from "./forms-docx-sample/factoryAuth";
 
 
 import JSZip from "jszip";
@@ -24,7 +26,7 @@ import { saveAs } from "file-saver";
 
 const DownloadPage = () => {
   const { selectedDocuments, formsData } = useContext(FormContext);
-  const { checkboxes, radios, factoryAuth, irSignAuth } = selectedDocuments;
+  const { checkboxes, radios, factoryAuth, irSignAuth ,form6, annexure1} = selectedDocuments;
   const { extraFields, setExtraFields } = useContext(FormContext);
 
   const getLetterhead = (docType) => {
@@ -47,14 +49,13 @@ const DownloadPage = () => {
     }
   };
 
-  
 
 
   const handleDownloadZip = async () => {
     const zip = new JSZip();
     const folder = zip.folder("Selected_Documents");
 
-    
+  
     for (const doc of combinedDocuments) {
       const { name } = doc;
 
@@ -116,6 +117,20 @@ const DownloadPage = () => {
             combinedDocuments
           );
           break;
+          
+        case "annexure1":
+          docBlob = await generateAnnexure1Document(
+            formsData,
+            combinedDocuments
+          ) ;
+          break; 
+        
+        case "form6":
+          docBlob = await generateForm6Document(
+            formsData,
+            combinedDocuments
+          );
+          break;
 
         default:
           continue; 
@@ -171,6 +186,30 @@ const DownloadPage = () => {
           },
         ]
       : []),
+
+      ...(form6 
+        ?[
+          {
+            name:"form6",
+            letterhead:getLetterhead("form6"),
+            signStamp:formsData.irSignatoryName
+          },
+        ]
+      :[]),
+
+      ...(annexure1
+        ?[
+          {
+            name:"annexure1",
+            letterhead:getLetterhead("annexure1"),
+            signStamp:formsData.irSignatoryName
+            
+           
+          },
+        ]
+      :[]),
+
+
   ];
 
   
@@ -223,8 +262,24 @@ const DownloadPage = () => {
         generateForm4ThirdPartyDocument(formsData, combinedDocuments);
         break;
 
+      case "factoryAuth":
+        generateFactoryAuthDocument(formsData,combinedDocuments);
+        break;
+      
+      // case "irSignAuth":
+        
+      
+      case "annexure1":
+        generateAnnexure1Document(formsData,combinedDocuments);
+        break;
+
+      case "form6":
+        generateForm6Document(formsData,combinedDocuments);
+        break;
+
       default:
         break;
+
     }
   };
 
