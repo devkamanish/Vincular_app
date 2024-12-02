@@ -27,12 +27,13 @@ const Dashboard = () => {
 
         {/* Cute Animated Character */}
         <div className=" absolute right-10 bottom-40 bg-[#D3B8A1]">
-          <Image
-            className = ""
+          <img
+
             src="/gif_1.gif"
             alt="Cute Character"
-            width={250}
-            height={250}
+            width="300"
+  
+            height="250"
           />
         </div>
       </main>

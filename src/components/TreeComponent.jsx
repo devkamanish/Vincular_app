@@ -6,7 +6,7 @@ const TreeComponent = ({onNodeClick}) => {
   const handleClick = (targetIds, event) => {
     event.preventDefault();
     if (onNodeClick) {
-      onNodeClick(targetIds); // Call the passed handler with the nodeId
+      onNodeClick(targetIds); 
     }
     targetIds.forEach((targetId) => {
       const targetElement = document.getElementById(targetId);
@@ -44,7 +44,7 @@ const TreeComponent = ({onNodeClick}) => {
                           <a
                             href="#home"
                             id="docList1"
-                            class="doclist"
+                            className="doclist"
                             onClick={(event) =>
                               handleClick(["form2", "form3C"], event)
                             }
@@ -62,7 +62,7 @@ const TreeComponent = ({onNodeClick}) => {
                           <a
                             href="#home"
                             id="docList2"
-                            class="doclist"
+                            className="doclist"
                             onClick={(event) =>
                               handleClick(
                                 ["form2", "form3C", "unregTmr"],
@@ -89,7 +89,7 @@ const TreeComponent = ({onNodeClick}) => {
                           <a
                             href="#home"
                             id="docList4"
-                            class="doclist"
+                            className="clist"
                             onClick={(event) =>
                               handleClick(
                                 ["form2", "brandAuth", "form3C"],
@@ -112,7 +112,7 @@ const TreeComponent = ({onNodeClick}) => {
                           <a
                             href="#home"
                             id="docList4"
-                            class="doclist"
+                            className="clist"
                             onClick={(event) =>
                               handleClick(
                                 ["form2", "brandAuth", "unregTmr", "form3C"],
@@ -149,7 +149,7 @@ const TreeComponent = ({onNodeClick}) => {
                               <a
                                 href="#home"
                                 id="docList5"
-                                class="doclist"
+                                className="clist"
                                 onClick={(event) =>
                                   handleClick(
                                     ["form2", "form4A", "form3A"],
@@ -173,7 +173,7 @@ const TreeComponent = ({onNodeClick}) => {
                               <a
                                 href="#home"
                                 id="docList6"
-                                class="doclist"
+                                className="clist"
                                 onClick={(event) =>
                                   handleClick(
                                     ["form2", "form4C", "", "form3B2"],
@@ -205,7 +205,7 @@ const TreeComponent = ({onNodeClick}) => {
                               <a
                                 href="#home"
                                 id="docList7"
-                                class="doclist"
+                                className="clist"
                                 onClick={(event) =>
                                   handleClick(
                                     ["form2", "form4A", "unregTmr", "form3A"],
@@ -230,7 +230,7 @@ const TreeComponent = ({onNodeClick}) => {
                               <a
                                 href="#home"
                                 id="docList8"
-                                class="doclist"
+                                className="clist"
                                 onClick={(event) =>
                                   handleClick(
                                     ["form2", "unregTmr", "form4C", "form3B2"],
@@ -268,7 +268,7 @@ const TreeComponent = ({onNodeClick}) => {
                               <a
                                 href="#home"
                                 id="docList9"
-                                class="doclist"
+                                className="clist"
                                 onClick={(event) =>
                                   handleClick(
                                     ["form2", "brandAuth", "form4A", "form3A"],
@@ -296,7 +296,7 @@ const TreeComponent = ({onNodeClick}) => {
                                   <a
                                     href="#home"
                                     id="docList10"
-                                    class="doclist"
+                                    className="clist"
                                     onClick={(event) =>
                                       handleClick(
                                         [
@@ -331,7 +331,7 @@ const TreeComponent = ({onNodeClick}) => {
                                   <a
                                     href="#home"
                                     id="docList11"
-                                    class="doclist"
+                                    className="clist"
                                     onClick={(event) =>
                                       handleClick(
                                         [
@@ -374,7 +374,7 @@ const TreeComponent = ({onNodeClick}) => {
                               <a
                                 href="#home"
                                 id="docList12"
-                                class="doclist"
+                                className="clist"
                                 onClick={(event) =>
                                   handleClick(
                                     [
@@ -409,7 +409,7 @@ const TreeComponent = ({onNodeClick}) => {
                                   <a
                                     href="#home"
                                     id="docList13"
-                                    class="doclist"
+                                    className="clist"
                                     onClick={(event) =>
                                       handleClick(
                                         [
@@ -447,7 +447,7 @@ const TreeComponent = ({onNodeClick}) => {
                                   <a
                                     href="#home"
                                     id="docList14"
-                                    class="doclist"
+                                    className="clist"
                                     onClick={(event) =>
                                       handleClick(
                                         [
