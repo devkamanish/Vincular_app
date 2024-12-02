@@ -15,10 +15,10 @@ import { generateForm3ADocument } from "./forms-docx-sample/form3A";
 import { generateForm4BrandDocument } from "./forms-docx-sample/form4Brand";
 import { generateForm4ThirdPartyDocument } from "./forms-docx-sample/form4ThirdParty";
 import { generateNonexistenceDocument } from "./forms-docx-sample/Nonexistence";
-import { generateDocxFile } from "./forms-docx-sample/formTwo";
 import { generateAnnexure1Document } from "./forms-docx-sample/annexure1";
 import { generateForm6Document } from "./forms-docx-sample/form6";
 import { generateFactoryAuthDocument } from "./forms-docx-sample/factoryAuth";
+import { generateIrSignAuthDocument } from "./forms-docx-sample/irSignAuth";
 
 
 import JSZip from "jszip";
@@ -46,15 +46,34 @@ const DownloadPage = () => {
       return formsData.irFirmName;
     } else {
       return "";
-    }
+    } 
   };
+ 
 
+  const getSignStamp = (docType)=>{
+    if(["form2"].includes(docType)){
+      return "Balbir Singh Bora";
+    }else if(["brandAuth", "unregTmr", "nonexistenceBrand"].includes(docType)){
+      return formsData.brandOwnerSigName;
+    } else if(["irSignAuth"].includes(docType)){
+      return formsData.irSignatoryName +", "+ formsData.irSignatoryHeadName;
+    } else if(["factoryAuth"].includes(docType)){
+      return formsData.manufacturerHeadSig +", "+formsData.manufacturerSignatoryName;
+    }else if(["form6","annexure1"].includes(docType)){
+      return formsData.manufacturerSignatoryName + ", "+ formsData.irSignatoryName;
 
+    } else if(["form3A","form3B1","form3B2"].includes(docType)){
+      return formsData.irSignatoryName;
+    } 
+    else if(["form4A","form4B","form4C","form3C"].includes(docType)){
+      return formsData.manufacturerSignatoryName;
+    }
+  }
 
   const handleDownloadZip = async () => {
     const zip = new JSZip();
     const folder = zip.folder("Selected_Documents");
-
+  
   
     for (const doc of combinedDocuments) {
       const { name } = doc;
@@ -110,13 +129,17 @@ const DownloadPage = () => {
             combinedDocuments
           );
           break;
-
+        
         case "form4C":
           docBlob = await generateForm4ThirdPartyDocument(
             formsData,
             combinedDocuments
           );
           break;
+        
+        case "irSignAuth":
+          docBlob = await generateIrSignAuthDocument(formsData,combinedDocuments);
+          break ;
           
         case "annexure1":
           docBlob = await generateAnnexure1Document(
@@ -155,7 +178,7 @@ const DownloadPage = () => {
         type: "checkbox",
         name: key,
         letterhead: getLetterhead(key),
-        signStamp: formsData.irSignatoryName,
+        signStamp: getSignStamp(key),
       })),
     ...Object.entries(radios)
       .filter(([key, value]) => value)
@@ -163,7 +186,7 @@ const DownloadPage = () => {
         type: "radio",
         name: key,
         letterhead: getLetterhead(key),
-        signStamp: formsData.irSignatoryName,
+        signStamp: getSignStamp(),
       })),
     ...(factoryAuth
       ? [
@@ -171,7 +194,7 @@ const DownloadPage = () => {
             type: "auth",
             name: "factoryAuth",
             letterhead: getLetterhead("factoryAuth"),
-            signStamp: formsData.irSignatoryName,
+            signStamp: getSignStamp("factoryAuth"),
           },
         ]
       : []),
@@ -182,7 +205,7 @@ const DownloadPage = () => {
             type: "auth",
             name: "irSignAuth",
             letterhead: getLetterhead("irSignAuth"),
-            signStamp: formsData.irSignatoryName,
+            signStamp: getSignStamp("irSignAuth"),
           },
         ]
       : []),
@@ -192,7 +215,7 @@ const DownloadPage = () => {
           {
             name:"form6",
             letterhead:getLetterhead("form6"),
-            signStamp:formsData.irSignatoryName
+            signStamp:getSignStamp("form6"),
           },
         ]
       :[]),
@@ -202,14 +225,11 @@ const DownloadPage = () => {
           {
             name:"annexure1",
             letterhead:getLetterhead("annexure1"),
-            signStamp:formsData.irSignatoryName
+            signStamp:getSignStamp("annexure1"),
             
-           
           },
         ]
       :[]),
-
-
   ];
 
   
@@ -265,10 +285,11 @@ const DownloadPage = () => {
       case "factoryAuth":
         generateFactoryAuthDocument(formsData,combinedDocuments);
         break;
-      
-      // case "irSignAuth":
-        
-      
+       
+      case "irSignAuth":
+        generateIrSignAuthDocument(formsData,combinedDocuments);
+        break;  
+  
       case "annexure1":
         generateAnnexure1Document(formsData,combinedDocuments);
         break;
@@ -355,7 +376,7 @@ const DownloadPage = () => {
                 <td className="p-2 border border-gray-300">{doc.letterhead}</td>
 
                 <td className="p-2 border border-gray-300">
-                  {formsData.irSignatoryName || "N/A"}
+                  {doc.signStamp}
                 </td>
               </tr>
             ))}

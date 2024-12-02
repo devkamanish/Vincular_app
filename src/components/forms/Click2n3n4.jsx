@@ -16,7 +16,7 @@ export default function Click2() {
     manufacturerSignatoryName: "",
     manufacturerSignatoryDesignation: "",
 
- 
+    
 
     manufacturerSignatoryAge: "",
     brand: "",
@@ -43,7 +43,7 @@ export default function Click2() {
     manufacturerHeadSig:"",
     manufacturerHeadSigDesignation :"",
 
-    registrationNoR:"",
+    registrationNoR :"",
     applyingPeriod:"",
     quantityMarkWithStandardMark:"",
     startDate:"",
