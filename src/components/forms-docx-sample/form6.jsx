@@ -36,9 +36,6 @@ import {
         modelNo,
         brand,
 
-
-
-
     } = formsData;
   
 
@@ -102,7 +99,7 @@ import {
                 ],
                 spacing: { after: 300 },
               }),
-  
+              
               // Content Paragraphs
               new Paragraph({
                 children: [

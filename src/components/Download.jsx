@@ -136,6 +136,9 @@ const DownloadPage = () => {
             combinedDocuments
           );
           break;
+        case "factoryAuth":
+          docBlob = await generateFactoryAuthDocument(formsData,combinedDocuments);
+          break;
         
         case "irSignAuth":
           docBlob = await generateIrSignAuthDocument(formsData,combinedDocuments);
@@ -158,7 +161,6 @@ const DownloadPage = () => {
         default:
           continue; 
       }
-
       
       if (docBlob) {
         folder.file(`${name}.docx`, docBlob);
