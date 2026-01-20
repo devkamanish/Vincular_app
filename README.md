@@ -33,7 +33,7 @@ All relevant documents are generated and downloaded as a single ZIP file.
 
 Screenshots
 Service Selection
-
+![alt text](image.png)
 Add screenshot here
 
 License Decision Tree
