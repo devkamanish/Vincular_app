@@ -31,22 +31,19 @@ Fill in the dynamically generated form fields
 Click the download button
 All relevant documents are generated and downloaded as a single ZIP file.
 
-Screenshots
+
 Service Selection
 ![alt text](image.png)
-Add screenshot here
 
 License Decision Tree
-
-Add screenshot here
+![alt text](image-1.png) 
 
 Form Input
-
-Add screenshot here
+![alt text](image-2.png)
 
 Installation & Setup
 git clone <repository-url>
-cd docs-automation-portal
+cd Vincular_app
 npm install
 npm run dev
 
